@@ -1,17 +1,14 @@
 ;; Exercise 2.12
 
 (define (make-interval a b) (cons a b))
+
 (define (lower-bound interval)
   (car interval))
+
 (define (upper-bound interval)
   (cdr interval))
 
 (define (div-interval x y)
-(define (make-interval a b) (cons a b))
-(define (lower-bound interval)
-  (car interval))
-(define (upper-bound interval)
-  (cdr interval))
   (if
    (and (<= (lower-bound y) 0)
        (>= (upper-bound y) 0))
