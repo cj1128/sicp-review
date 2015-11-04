@@ -1,20 +1,20 @@
 ;;Exercise 1.22
-(define (smallest-divisor n)
-  (find-divisor n 2))
 
 (define (squrare n)
   (* n n))
 
-(define (divide? test n)
-  (= (remainder n test) 0))
 
-(define (find-divisor n test)
-  (cond
-   ((> (square test) n) n)
-   ((divide? test n) test)
-   (else (find-divisor n (+ 1 test)))))
 
 (define (prime? n)
+  (define (smallest-divisor n)
+    (find-divisor n 2))
+  (define (find-divisor n test)
+    (cond
+     ((> (* test test) n) n)
+     ((divide? test n) test)
+     (else (find-divisor n (+ 1 test)))))
+  (define (divide? test n)
+    (= (remainder n test) 0))
   (if (= (smallest-divisor n) n) true false))
 
 (define (timed-prime-test n)
