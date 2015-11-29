@@ -1,6 +1,6 @@
 ;; Implementation of differentiation
 
-;;Suppose we have these selectors, constructors and predicates
+;;these are selectors, constructors and predicates
 
 ;; (variable? e)
 ;; (same-variable? v1 v2)
@@ -95,3 +95,6 @@
 (newline)
 
 (display (deriv '(* x y) 'x))
+(newline)
+
+(display (deriv '(* (* x y) (+ x 3)) 'x))
