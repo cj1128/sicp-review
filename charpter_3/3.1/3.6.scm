@@ -9,6 +9,6 @@
          (set! x (rand-update x))
          x)
         ((eq? arg 'reset)
-         (lambda (new-state)
-           (set! x new-state)))
+         (lambda (new-value)
+           (set! x new-value)))
         (else (error "rand can't perform such operation! " arg))))))
