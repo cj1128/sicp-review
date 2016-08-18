@@ -9,8 +9,8 @@
 (define pi-stream
   (stream-scale (partial-sums (pi-summands 1)) 4))
 
-;(show-stream pi-stream 10)
-
+(show-stream pi-stream 10)
+(newline)
 
 (define (euler-transform s)
   (let ((s0 (stream-ref s 0)) ;; S[n-1]
@@ -20,7 +20,8 @@
                           (+ s0 (* -2 s1) s2)))
                  (euler-transform (stream-cdr s))))) ;; S[n+1]
 
-;(show-stream (euler-transform pi-stream) 10)
+(show-stream (euler-transform pi-stream) 30)
+(newline)
 
 (define (make-tableau transform s)
   (cons-stream s (make-tableau transform (transform s))))
@@ -28,4 +29,6 @@
 (define (accelerated-sequence transform s)
   (stream-map stream-car (make-tableau transform s)))
 
+;; if we show 20 items in stream, there will be some strange #[NaN]s
 (show-stream (accelerated-sequence euler-transform pi-stream) 10)
+(newline)

@@ -32,6 +32,6 @@
 (define (accelerated-sequence transform s)
   (stream-map stream-car (make-tableau transform s)))
 
-(show-stream (accelerated-sequence euler-transform log-stream) 10)
+(show-stream (accelerated-sequence euler-transform log-stream) 20)
 
 
