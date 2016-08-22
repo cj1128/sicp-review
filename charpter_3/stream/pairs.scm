@@ -2,9 +2,6 @@
 ;; Want to generate a stream that contains the pairs
 ;; (i, j) with i <= j
 
-
-(load "utils.scm")
-
 (define (interleave s1 s2)
   (if (stream-null? s1)
     s2
@@ -18,10 +15,10 @@
                   (stream-cdr t))
       (pairs (stream-cdr s) (stream-cdr t)))))
 
-(define ints (integers-starting-from 1))
+;(define ints (integers-starting-from 1))
 
-(define int-pairs
-  (pairs ints ints))
+;(define int-pairs
+;  (pairs ints ints))
 
-(show-stream int-pairs 30)
+;(show-stream int-pairs 30)
 

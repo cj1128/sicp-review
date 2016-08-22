@@ -17,14 +17,10 @@
 
 (define (show-stream s n)
   (define (iter stream i)
+    (display (stream-car stream))
+    (newline)
     (if (< i n)
-        (begin
-          (display (stream-car stream))
-          (newline)
-          (iter (stream-cdr stream) (+ i 1)))))
-  (iter s 0))
-
-(define (interleave s1 s2)
-  (if (stream-null? s1)
-    s2
-    (cons-stream (stream-car s1) (interleave s2 (stream-cdr s1)))))
+      (iter (stream-cdr stream) (+ i 1))))
+  (if (< n 1)
+      (error "count must greater or equal to 1")
+      (iter s 1)))
