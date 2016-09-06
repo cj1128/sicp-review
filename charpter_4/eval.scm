@@ -14,6 +14,7 @@
         ((begin? exp)
          (eval-sequence (begin-actions exp) env))
         ((cond? exp) (eval (cond->if exp) env))
+        ((let? exp) (eval (let->combination exp) env))
         ((application? exp)
          (apply (eval (operator exp) env)
                 (list-of-values (operands exp) env)))
@@ -138,7 +139,7 @@
 ;; are called derived expressions
 (define (cond? exp) (tagged-list? exp 'cond))
 (define (cond-clauses exp) (cdr exp))
-(define (cond-else-caluse? exp) (eq? (cond-predicate exp) 'else))
+(define (cond-else-clause? exp) (eq? (cond-predicate exp) 'else))
 (define (cond-predicate clause) (car clause))
 (define (cond-actions clause) (cdr clause))
 (define (cond->if exp) (expand-clauses (cond-clauses exp)))
@@ -147,10 +148,26 @@
       'false
       (let ((first (car clauses))
             (rest (cdr clauses)))
-        (if (cond-else-caluse? first)
-            (if (null? reset)
+        (if (cond-else-clause? first)
+            (if (null? rest)
                 (sequence->exp (cond-actions first))
                 (error "ELSE clause isn't last: COND->IF" clauses))
             (make-if (cond-predicate first)
                      (sequence->exp (cond-actions first))
                      (expand-clauses rest))))))
+
+;; let
+(define (let? exp) (tagged-list exp 'let))
+(define (let-vars exp)
+  (map car (cadr exp)))
+(define (let-exps exp)
+  (map cadr (cadr exp)))
+(define (let-body exp)
+  (cddr exp))
+
+(define (let->combination exp)
+  (cons (make-lambda
+          (let-vars exp)
+          (let-body exp))
+        (let-exps exp)))
+
