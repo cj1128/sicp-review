@@ -15,6 +15,7 @@
          (eval-sequence (begin-actions exp) env))
         ((cond? exp) (eval (cond->if exp) env))
         ((let? exp) (eval (let->combination exp) env))
+        ((let*? exp) (eval (let*->nested-lets exp) env))
         ((application? exp)
          (apply (eval (operator exp) env)
                 (list-of-values (operands exp) env)))
@@ -157,6 +158,7 @@
                      (expand-clauses rest))))))
 
 ;; let
+;(let ((<var1> <value1>) (<var2> <value2>)) <body1> <body2>)
 (define (let? exp) (tagged-list exp 'let))
 (define (let-vars exp)
   (map car (cadr exp)))
@@ -170,4 +172,16 @@
           (let-vars exp)
           (let-body exp))
         (let-exps exp)))
+
+;; let*
+;; (let* ((x 1) (y (+ x 1))) <body1> <body2>)
+(define (let*? exp) (tagged-list exp 'let*))
+(define (let*-body exp) (caddr exp))
+(define (let*-params exp) (cadr exp))
+(define (let*->nested-lets exp)
+  (define (make-lets params)
+    (if (null? params)
+        (let*-body exp)
+        (list 'let (list (car params)) (make-lets (cdr params)))))
+  (make-lets (let*-params exp)))
 
