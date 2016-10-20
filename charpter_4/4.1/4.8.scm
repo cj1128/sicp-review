@@ -28,11 +28,3 @@
               (let-vars exp)
               (let-body exp))
             (let-exps exp))))
-
-((lambda () ()) 1 2)
-((define a ()) (a 1 2))
-(lambda () ())
-((lambda () (
-  (define a ())
-  (a 1 2 3)
-)))

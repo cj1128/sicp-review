@@ -1,6 +1,5 @@
 ;; definition of eval
 
-
 (define (eval exp env)
   (cond ((self-evaluating? exp) exp)
         ((variable? exp) (lookup-variable-value exp env))
@@ -91,9 +90,10 @@
   (if (symbol? (cadr exp))
       (caddr exp)
       (make-lambda (cdadr exp) ; formal paramters
-                   (caddr exp)))) ; body
+                   (cddr exp)))) ; body
 
 ;; lambda expressions are lists the begin with the symbol lambda
+;; lambda are lists that begin with the symbol lambda
 (define (lambda? exp) (tagged-list? exp 'lambda))
 (define (lambda-parameters exp) (cadr exp))
 (define (lambda-body exp) (cddr exp))
@@ -136,7 +136,7 @@
 (define (rest-operands ops) (cdr ops))
 
 ;; cond
-;; expressions that we choose to implemement as syntactic transformation
+;; expressions that we choose to implement as syntactic transformation
 ;; are called derived expressions
 (define (cond? exp) (tagged-list? exp 'cond))
 (define (cond-clauses exp) (cdr exp))
@@ -184,4 +184,8 @@
         (let*-body exp)
         (list 'let (list (car params)) (make-lets (cdr params)))))
   (make-lets (let*-params exp)))
+
+;; for conditionals, we accept anyting to be true that is not the explicit false object
+(define (true? x) (not (eq? x false)))
+(define (false? x) (eq? x false))
 
