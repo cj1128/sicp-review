@@ -16,7 +16,7 @@
         ((let? exp) (eval (let->combination exp) env))
         ((let*? exp) (eval (let*->nested-lets exp) env))
         ((application? exp)
-         (apply (eval (operator exp) env)
+         (m-apply (eval (operator exp) env)
                 (list-of-values (operands exp) env)))
         (else
           (error "Unknown expression type: EVAL" exp))))
@@ -98,7 +98,7 @@
 (define (lambda-parameters exp) (cadr exp))
 (define (lambda-body exp) (cddr exp))
 
-(define (make-lambda paramters body)
+(define (make-lambda parameters body)
   (cons 'lambda (cons parameters body)))
 
 ;; conditionals begin with if and have a predicate, a consequent,
@@ -159,7 +159,7 @@
 
 ;; let
 ;(let ((<var1> <value1>) (<var2> <value2>)) <body1> <body2>)
-(define (let? exp) (tagged-list exp 'let))
+(define (let? exp) (tagged-list? exp 'let))
 (define (let-vars exp)
   (map car (cadr exp)))
 (define (let-exps exp)
@@ -175,7 +175,7 @@
 
 ;; let*
 ;; (let* ((x 1) (y (+ x 1))) <body1> <body2>)
-(define (let*? exp) (tagged-list exp 'let*))
+(define (let*? exp) (tagged-list? exp 'let*))
 (define (let*-body exp) (caddr exp))
 (define (let*-params exp) (cadr exp))
 (define (let*->nested-lets exp)

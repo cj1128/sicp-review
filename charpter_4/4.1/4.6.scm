@@ -1,5 +1,5 @@
 ;; Exercise 4.6
-;; Implemement a syntactic transformation let->combination that
+;; Implements a syntactic transformation let->combination that
 ;; reduces evaluating let expressions to evaluating combinations
 
 (define (let-vars exp)

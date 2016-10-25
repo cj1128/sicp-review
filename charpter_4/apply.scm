@@ -1,7 +1,5 @@
 ;; definition of apply
-
-
-(define (apply procedure arguments)
+(define (m-apply procedure arguments)
   (cond ((primitive-procedure? procedure)
          (apply-primitive-procedure procedure arguments))
         ((compound-procedure? procedure)
@@ -15,13 +13,12 @@
           (error "Unknown procedure type: APPLY" procedure))))
 
 (define (make-procedure parameters body env)
-  (list 'procedure paratmers body env))
+  (list 'procedure parameters body env))
 (define (compound-procedure? p)
   (tagged-list? p 'procedure))
 (define (procedure-paramaters p) (cadr p))
 (define (procedure-body p) (caddr p))
-(define (proocedure-environment p) (cadddr p))
-
+(define (procedure-environment p) (cadddr p))
 
 ;; environment operations
 (define (enclosing-environment env) (cdr env))
@@ -83,3 +80,34 @@
               (set-car! vals val)
               (scan (cdr vars) (cdr vals)))))
     (scan (frame-variables frame) (frame-values frame))))
+
+(define (primitive-procedure? proc)
+  (tagged-list? proc 'primitive))
+(define (primitive-implementation proc) (cdr proc))
+
+(define primitive-procedures
+  (list (cons 'car car)
+        (cons 'cdr cdr)
+        (cons 'cons cons)
+        (cons 'null? null?)
+        (cons 'map map)
+        ))
+(define (primitive-procedure-names)
+  (map car primitive-procedures))
+(define (primitive-procedure-objects)
+  (map (lambda (proc) (cons 'primitive (cdr proc)))
+       primitive-procedures))
+
+(define (setup-environment)
+  (let ((initial-env
+          (extend-environment (primitive-procedure-names)
+                              (primitive-procedure-objects)
+                              the-empty-environment)))
+    (define-variable! 'true true initial-env)
+    (define-variable! 'false false initial-env)
+    initial-env))
+
+(define (apply-primitive-procedure proc args)
+  (apply
+    (primitive-implementation proc) args))
+
