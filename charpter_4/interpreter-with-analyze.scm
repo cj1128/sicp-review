@@ -1,4 +1,6 @@
+;; new interpreter using eval with analyze
 (load "eval.scm")
+(load "eval-with-analyze.scm")
 (load "apply.scm")
 
 (define input-prompt ";;; M-Eval input:")
@@ -6,7 +8,7 @@
 (define (driver-loop)
   (prompt-for-input input-prompt)
   (let ((input (read)))
-    (let ((output (eval input the-global-environment)))
+    (let ((output (eval-with-analyze input the-global-environment)))
       (announce-output output-prompt)
       (user-print output)))
   (driver-loop))
@@ -25,8 +27,3 @@
 
 (define the-global-environment (setup-environment))
 (driver-loop)
-
-;; (define (append x y)
-;;   (if (null? x)
-;;       y
-;;       (cons (car x) (append (cdr x) y))))

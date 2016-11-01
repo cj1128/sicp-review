@@ -188,4 +188,3 @@
 ;; for conditionals, we accept anyting to be true that is not the explicit false object
 (define (true? x) (not (eq? x false)))
 (define (false? x) (eq? x false))
-

@@ -6,7 +6,7 @@
          (eval-sequence
            (procedure-body procedure)
            (extend-environment
-             (procedure-paramaters procedure)
+             (procedure-parameters procedure)
              arguments
              (procedure-environment procedure))))
         (else
@@ -16,7 +16,7 @@
   (list 'procedure parameters body env))
 (define (compound-procedure? p)
   (tagged-list? p 'procedure))
-(define (procedure-paramaters p) (cadr p))
+(define (procedure-parameters p) (cadr p))
 (define (procedure-body p) (caddr p))
 (define (procedure-environment p) (cadddr p))
 
@@ -90,7 +90,11 @@
         (cons 'cdr cdr)
         (cons 'cons cons)
         (cons 'null? null?)
-        (cons 'map map)
+        (cons '= =)
+        (cons '* *)
+        (cons '- -)
+        (cons '+ +)
+        (cons '/ /)
         ))
 (define (primitive-procedure-names)
   (map car primitive-procedures))

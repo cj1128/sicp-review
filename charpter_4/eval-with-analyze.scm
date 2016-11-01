@@ -1,6 +1,6 @@
 ;; eval using analyze
 
-(define (eval exp env) ((analyze exp) env))
+(define (eval-with-analyze exp env) ((analyze exp) env))
 
 (define (analyze exp)
   (cond ((self-evaluating? exp) (analyze-self-evaluating exp))
@@ -48,7 +48,7 @@
                       (aproc env)))))
 
 (define (analyze-lambda exp)
-  (let ((vars (lambda-variables exp))
+  (let ((vars (lambda-parameters exp))
         (bproc (analyze-sequence (lambda-body exp))))
     (lambda (env) (make-procedure vars bproc env))))
 
@@ -72,6 +72,7 @@
        (fproc env)
        (map (lambda (aproc) (aproc env))
             aprocs)))))
+
 (define (execute-application proc args)
   (cond ((primitive-procedure? proc)
          (apply-primitive-procedure proc args))
