@@ -1,5 +1,7 @@
 ;; definition of eval
 
+(load "apply.scm")
+
 (define (eval exp env)
   (cond ((self-evaluating? exp) exp)
         ((variable? exp) (lookup-variable-value exp env))
@@ -17,9 +19,9 @@
         ((let*? exp) (eval (let*->nested-lets exp) env))
         ((application? exp)
          (m-apply (eval (operator exp) env)
-                (list-of-values (operands exp) env)))
+                  (list-of-values (operands exp) env)))
         (else
-          (error "Unknown expression type: EVAL" exp))))
+         (error "Unknown expression type: EVAL" exp))))
 
 (define (eval-if exp env)
   (if (true? (eval (if-predicate exp) env))
@@ -36,8 +38,8 @@
   (cond ((last-exp? exps)
          (eval (first-exp exps) env))
         (else
-          (eval (first-exp exps) env)
-          (eval-sequence (rest-exps exps) env))))
+         (eval (first-exp exps) env)
+         (eval-sequence (rest-exps exps) env))))
 
 (define (eval-assignment exp env)
   (set-variable-value! (assignment-variable exp)
@@ -47,8 +49,8 @@
 
 (define (eval-definition exp env)
   (define-variable! (definition-variable exp)
-                    (eval (definition-value exp) env)
-                    env)
+    (eval (definition-value exp) env)
+    env)
   'ok)
 
 ;; the only self-evaluating items are numbers and strings
@@ -158,7 +160,7 @@
                      (expand-clauses rest))))))
 
 ;; let
-;(let ((<var1> <value1>) (<var2> <value2>)) <body1> <body2>)
+                                        ;(let ((<var1> <value1>) (<var2> <value2>)) <body1> <body2>)
 (define (let? exp) (tagged-list? exp 'let))
 (define (let-vars exp)
   (map car (cadr exp)))
@@ -169,8 +171,8 @@
 
 (define (let->combination exp)
   (cons (make-lambda
-          (let-vars exp)
-          (let-body exp))
+         (let-vars exp)
+         (let-body exp))
         (let-exps exp)))
 
 ;; let*

@@ -1,7 +1,6 @@
 ;; new interpreter using eval with analyze
-(load "eval.scm")
+
 (load "eval-with-analyze.scm")
-(load "apply.scm")
 
 (define input-prompt ";;; M-Eval input:")
 (define output-prompt ";;; M-Eval value:")
@@ -20,7 +19,7 @@
 (define (user-print object)
   (if (compound-procedure? object)
       (display (list 'compound-procedure
-                     (procedure-paramaters object)
+                     (procedure-parameters object)
                      (procedure-body object)
                      '<procedure-env>))
       (display object)))

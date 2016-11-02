@@ -1,5 +1,5 @@
 ;; Exercise 2.49
-;; Use segments->painter to defien some primitive painters
+;; Use segments->painter to define some primitive painters
 
 (define draw-outline
   (segments->painter
