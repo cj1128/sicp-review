@@ -1,7 +1,5 @@
 ;; definition of eval
 
-(load "apply.scm")
-
 (define (eval exp env)
   (cond ((self-evaluating? exp) exp)
         ((variable? exp) (lookup-variable-value exp env))
@@ -160,7 +158,8 @@
                      (expand-clauses rest))))))
 
 ;; let
-                                        ;(let ((<var1> <value1>) (<var2> <value2>)) <body1> <body2>)
+;; (let ((<var1> <value1>) (<var2> <value2>)) <body1> <body2>)
+
 (define (let? exp) (tagged-list? exp 'let))
 (define (let-vars exp)
   (map car (cadr exp)))

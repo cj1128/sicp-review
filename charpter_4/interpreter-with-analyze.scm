@@ -1,5 +1,7 @@
 ;; new interpreter using eval with analyze
 
+(load "apply.scm")
+(load "eval.scm")
 (load "eval-with-analyze.scm")
 
 (define input-prompt ";;; M-Eval input:")

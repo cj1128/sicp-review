@@ -1,7 +1,5 @@
 ;; eval using analyze
 
-(load "eval.scm")
-
 (define (eval-with-analyze exp env) ((analyze exp) env))
 
 (define (analyze exp)

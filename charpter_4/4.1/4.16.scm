@@ -25,6 +25,7 @@
   (filter (lambda (def) (eq? (car def) 'define)) body))
 (define (non-internal-defs body)
   (filter (lambda (def) (not (eq? (car def) 'define))) body))
+
 ;; notice: define has two forms
 ;; (define <var> <value>)
 ;; (define (<var> <param1> <param2> ...) <body>)
@@ -34,12 +35,12 @@
     (if (null? defs)
         body
         (list
-         (append
-          (list 'let
-                (map (lambda (def) (list (definition-variable def) '*unassigned*)) defs))
           (append
-           (map (lambda (def) (list 'set! (definition-variable def) (definition-value def))) defs)
-           non-defs)))))))
+            (list 'let
+                  (map (lambda (def) (list (definition-variable def) '*unassigned*)) defs))
+            (append
+              (map (lambda (def) (list 'set! (definition-variable def) (definition-value def))) defs)
+              non-defs))))))
 
 ;; c
 (define (make-procedure parameters body env)
@@ -49,11 +50,14 @@
 ;; expression is first evaluated and not every time
 ;; a procedure is called
 
-;; (define body '((define u 1) (define v 2) (display u) (display v)))
-;; (define body2 '((display 100) (display 200) (display 300)))
-;; (display (scan-out-defines body))
-;; (newline)
-;; (display (scan-out-defines body2))
-(newline)
-(define body3 '((define (f x) (display x)) (define (g y) (display y)) (f 100) (g 200)))
-(display (scan-out-defines body3))
+;; some test code
+;(define test '((define u 1) (define v 2) (display u) (display v)))
+;(display (scan-out-defines test))
+;(newline)
+
+;(define test2 '((display 100) (display 200) (display 300)))
+;(display (scan-out-defines test2))
+;(newline)
+
+;(define test3 '((define (f x) (display x)) (define (g y) (display y)) (f 100) (g 200)))
+;(display (scan-out-defines test3))

@@ -1,5 +1,7 @@
 ;; lazy interpreter
 
+(load "apply.scm")
+(load "eval.scm")
 (load "lazy-eval.scm")
 
 (define input-prompt ";;; Lazy-Eval input:")

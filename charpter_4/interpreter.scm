@@ -1,5 +1,6 @@
 ;; eval
 
+(load "apply.scm")
 (load "eval.scm")
 
 (define input-prompt ";;; M-Eval input:")
