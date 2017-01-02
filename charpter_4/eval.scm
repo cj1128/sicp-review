@@ -19,7 +19,7 @@
          (m-apply (eval (operator exp) env)
                   (list-of-values (operands exp) env)))
         (else
-         (error "Unknown expression type: EVAL" exp))))
+          (error "Unknown expression type: EVAL" exp))))
 
 (define (eval-if exp env)
   (if (true? (eval (if-predicate exp) env))
@@ -36,8 +36,8 @@
   (cond ((last-exp? exps)
          (eval (first-exp exps) env))
         (else
-         (eval (first-exp exps) env)
-         (eval-sequence (rest-exps exps) env))))
+          (eval (first-exp exps) env)
+          (eval-sequence (rest-exps exps) env))))
 
 (define (eval-assignment exp env)
   (set-variable-value! (assignment-variable exp)
@@ -46,7 +46,8 @@
   'ok)
 
 (define (eval-definition exp env)
-  (define-variable! (definition-variable exp)
+  (define-variable!
+    (definition-variable exp)
     (eval (definition-value exp) env)
     env)
   'ok)
@@ -170,8 +171,8 @@
 
 (define (let->combination exp)
   (cons (make-lambda
-         (let-vars exp)
-         (let-body exp))
+          (let-vars exp)
+          (let-body exp))
         (let-exps exp)))
 
 ;; let*

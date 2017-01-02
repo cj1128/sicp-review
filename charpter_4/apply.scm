@@ -65,7 +65,7 @@
     (if (eq? env the-empty-environment)
         (error "Unbound variable: SET!" var)
         (let ((frame (first-frame env)))
-          (scan (frame-variables) (frame-values)))))
+          (scan (frame-variables frame) (frame-values frame)))))
   (env-loop env))
 
 ;; To define a variable, we search the first frame for a binding for the
@@ -89,6 +89,7 @@
   (list (cons 'car car)
         (cons 'cdr cdr)
         (cons 'cons cons)
+        (cons 'list list)
         (cons 'null? null?)
         (cons '= =)
         (cons '* *)
