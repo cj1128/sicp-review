@@ -5,5 +5,4 @@
       a
       (gcd b (remainder a b))))
 
-
 (display (gcd 3 8))

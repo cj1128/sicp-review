@@ -21,7 +21,7 @@
   (display "/")
   (display (denom x)))
 
-(display (print-rat (make-rat 3 8)))
-(display (print-rat (make-rat 3 -8)))
-(display (print-rat (make-rat -3 8)))
-(display (print-rat (make-rat -3 -8)))
+(print-rat (make-rat 3 8))
+(print-rat (make-rat 3 -8))
+(print-rat (make-rat -3 8))
+(print-rat (make-rat -3 -8))

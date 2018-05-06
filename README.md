@@ -1,16 +1,18 @@
-# Structure and Interpretation of Computer Programs
+<div align="center">
+  <h1>
+    Structure and Interpretation of Computer Programs
+  </h1>
 
-![](./cover.jpg)
+  <img src="./cover.jpg">
+</div>
 
-## First Things First
+## Environment setup for Mac OS
 
-- Env: Mac OSX 10.10
-
-- `brew tap homebrew/x11 && brew install mit-scheme`
-
-- emacs: `M-x: run-scheme`
-
-- sublime text scheme building system:
+1. `brew install mit-scheme`
+2. `brew install rlwrap`
+3. `cp REPO/scheme-completion.txt ~/scheme-completion.txt`
+4. `echo 'alias sicp="rlwrap -r -c -f ~/scheme-completion.txt mit-scheme"' >> ~/.zshrc`
+5. config sublime text build system:
 
   ``` json
   {
