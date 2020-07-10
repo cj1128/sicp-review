@@ -50,18 +50,24 @@ exit $code
 
 <!-- MarkdownTOC -->
 
-- [Charpter 1: Building Abstractions with Procedures](#charpter-1-building-abstractions-with-procedures)
+- [Chapter 1: Building Abstractions with Procedures](#chapter-1-building-abstractions-with-procedures)
   - [1.1: The Elements of Programming](#11-the-elements-of-programming)
     - [Exercise 1.1](#exercise-11)
     - [Exercise 1.2](#exercise-12)
     - [Exercise 1.3](#exercise-13)
     - [Exercise 1.4](#exercise-14)
     - [Exercise 1.5](#exercise-15)
+    - [Exercise 1.6](#exercise-16)
+    - [Exercise 1.7](#exercise-17)
+    - [Exercise 1.8](#exercise-18)
+  - [1.2: Procedures and the Processes They Generate](#12-procedures-and-the-processes-they-generate)
+    - [Exercise 1.9](#exercise-19)
+    - [Exercise 1.10](#exercise-110)
 - [Mit Scheme](#mit-scheme)
 
 <!-- /MarkdownTOC -->
 
-## Charpter 1: Building Abstractions with Procedures
+## Chapter 1: Building Abstractions with Procedures
 
 Lisp is so old and also so good.
 
@@ -84,7 +90,7 @@ Name matters.
 
 > A critical aspect of a programming language is the means it provides for using names to refer to computational objects.
 
-Some expressions do not follow general evaluation rule. They are special, like `(define x 1)`.
+Some expressions do not follow general evaluation rule. They are special so they are called `special forms`, like `(define x 1)`.
 
 > Such exceptions to the general evaluation rule are called special forms. ... Each special form has its own evalu- ation rule. The various kinds of expressions (each with its associated evaluation rule) constitute the syntax of the programming language.
 
@@ -177,6 +183,202 @@ Because in application-order evaluator, when it evaluates `(test 0 (p))`, it wil
 `p` is a procedure which calls itself. So to evaluate `(p)`, we get `(p)` again, and we evaluate that, we get it again, so on and so forth, we can never get a result.
 
 But in normal-order evaluator, it won't evaluate operands until it has to. So `(test 0 (p))` becomes `(if (= 0 0) 0 (p)`. Because `(= 0 0)` is true, it will never evaluate `(p)`.
+
+---
+
+How to compute square roots?
+
+> How does one compute square roots? Thee most common way is to use Newton’s method of successive approximations, which says that whenever we have a guess y for the value of the square root of a number x , we can perform a simple manipulation to get a better guess (one closer to the actual square root) by averaging y with x/y.
+
+NOTE that in MIT Scheme, we get rational numbers if we divide two integers.
+
+> MIT Scheme, however, distinguishes between exact integers and decimal values, and dividing two integers produces a rational number rather than a decimal.
+
+#### Exercise 1.6
+
+The procedure would hang forever because it continuously evaluates `sqrt-iter`.
+
+#### Exercise 1.7
+
+For small numbers, the result will be inaccurate. Let's say we need to iterate 10 times to find the square root of number x, because x is very small, the first time iterated value and x can satisfy the `good-enough?` condition.
+
+```scheme
+(display (sqrt 0.00001))
+; .03135649010771716
+; this value is very inaccurate
+```
+
+For big numbers, the program will run forever. We can never find a number to satisfy the condition because we only have limited precision.
+
+```scheme
+; CAUTION! this function will run forever
+(display (sqrt 1.797693134862315708145274237317043567981e+308))
+```
+
+Does it help with the new `good-enough?` implementation? Of course! See the code here [1.07.scm](./chapter-1/1.1/1.07.scm).
+
+```scheme
+; very small number
+(display (sqrt 0.00001))
+(newline)
+; 3.172028655357483e-3
+
+; very large number
+(display (sqrt 1.797693134862315708145274237317043567981e+308))
+(newline)
+; 1.3407807929942597e154
+```
+
+#### Exercise 1.8
+
+[1.08.scm](./chapter-1/1.1/1.08.scm).
+
+---
+
+We can define functions inside functions.
+
+>  ... we allow a procedure to have internal definitions that are local to that procedure. Such nesting of definitions, called block structure, is basically the right solution to the simplest name-packaging problem.
+
+What is *lexical scoping*?
+
+> Lexical scoping dictates that free variables in a procedure are taken to refer to bindings made by enclosing procedure definitions; that is, they are looked up in the environment in which the procedure was defined.
+
+### 1.2: Procedures and the Processes They Generate
+
+**Recursive process** and **Iterative process**.
+
+Recursive:
+
+```scheme
+(define (factorial n)
+  (if (= n 1)
+      1
+      (* n (factorial (- n 1)))))
+
+(factorial 6)
+(* 6 (factorial 5))
+(* 6 (* 5 (factorial 4)))
+(* 6 (* 5 (* 4 (factorial 3))))
+(* 6 (* 5 (* 4 (* 3 (factorial 2)))))
+(* 6 (* 5 (* 4 (* 3 (* 2 (factorial 1))))))
+(* 6 (* 5 (* 4 (* 3 (* 2 1)))))
+(* 6 (* 5 (* 4 (* 3 2))))
+(* 6 (* 5 (* 4 6)))
+(* 6 (* 5 24))
+(* 6 120)
+```
+
+> This type of process, characterized by a chain of deferred operations, is called a *recursive process*. Carrying out this process requires that the interpreter keep track of the operations to be performed later on.
+
+Iterative:
+
+```scheme
+(define (factorial n)
+  (define (fact-iter product counter max-count)
+    (if (> counter max-count)
+        product
+        (fact-iter (* product counter) (+ counter 1) max-count)))
+  (fact-iter 1 1 n))
+
+(factorial 6)
+(fact-iter 1 1 6)
+(fact-iter 1 2 6)
+(fact-iter 2 3 6)
+(fact-iter 6 4 6)
+(fact-iter 24 5 6)
+(fact-iter 120 6 6)
+(fact-iter 720 7 6)
+```
+
+> By contrast, the second process does not grow and shrink. At each step, all we need to keep track of, for any n, are the current values of the variables `product`, `counter`, and `max-count`. We call this an *iterative process*.
+
+> In general, an iterative process is one whose state can be summarized by a fixed number of state variables, together with a fixed rule that describes how the state variables should be updated as the process moves from state to state and an (optional) end test that specifies conditions under which the process should terminate.
+
+*Recursive process* is not the same as *recursive procedure*. We can use a skill called *Tail Call Optimization* to get an iterative process of a recursive procedure.
+
+In my understanding, process is the running entity and procedure is the static code.
+
+> When we describe a procedure as recursive, we are referring to the syntactic fact that the procedure definition refers (either directly or indirectly) to the procedure itself. But when we describe a process as following a pattern that is, say, linearly recursive, we are speaking about how the process evolves, not about the syntax of how a procedure is written.
+
+#### Exercise 1.9
+
+```scheme
+(define (+ a b)
+  (if (= a 0) b (inc (+ (dec a) b))))
+
+(+ 4 5)
+(inc (+ 3 5))
+(inc (inc (+ 2 5)))
+(inc (inc (inc (+ 1 5))))
+(inc (inc (inc (inc (+ 0 5)))))
+(inc (inc (inc (inc 5))))
+(inc (inc (inc 6)))
+(inc (inc 7))
+(inc 8)
+9
+
+; this is a recursive process.
+```
+
+```scheme
+(define (+ a b)
+  (if (= a 0) b (+ (dec a) (inc b))))
+
+(+ 4 5)
+(+ 3 6)
+(+ 2 7)
+(+ 1 8)
+(+ 0 9)
+9
+
+; this is a iterative process.
+```
+
+#### Exercise 1.10
+
+```scheme
+; Ackermann’s function
+(define (A x y) (cond ((= y 0) 0)
+  ((= x 0) (* 2 y))
+  ((= y 1) 2)
+  (else (A (- x 1) (A x (- y 1))))))
+
+; (A 1 10)
+; -> (A 0 (A 1 9))
+; -> (A 0 (A 0 (A 1 8)))
+; -> (A 0 (A 0 (A 0 (A 1 7))))
+; -> (A 0 (A 0 (A 0 (A 0 (A 1 6)))))
+; ...
+; 2^10 = 1024
+; So, (A 1 x) means 2^x
+
+; (A 2 4)
+; -> (A 1 (A 2 3))
+; -> (A 1 (A 1 (A 2 2)))
+; -> (A 1 (A 1 (A 1 (A 2 1))))
+; -> (A 1 (A 1 (A 1 2)))
+; ...
+; 2^(2^(2^2)) = 2^16 = 65536
+; So, (A 2 x) means 2^(2^(2^...)) number of 2 is x
+
+; (A 3 3)
+; -> (A 2 (A 3 2))
+; -> (A 2 (A 2 (A 3 1)))
+; -> (A 2 (A 2 2))
+; ...
+; -> (A 2 4)
+; 2^(2^(2^2)) = 2^16 = 65536
+
+(define (f n) (A 0 n)) ; 2n
+(define (g n) (A 1 n)) ; 2^n
+(define (h n) (A 2 n)) ; 2^(2^(2^(...))) number of 2 is n
+```
+
+---
+
+How many different ways can we make change of $1.00, given half-dollars, quarters, dimes, nickels, and pennies?
+
+This problem has a simple solution as a recursive procedure. See [count-change](./chapter-1/1.1/count-change.scm)
 
 ## Mit Scheme
 
