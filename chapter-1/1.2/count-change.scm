@@ -22,5 +22,5 @@
 
 (define (count-change amount) (cc amount 5))
 
-(display (count-change 100))
+(display (count-change 60))
 (newline)

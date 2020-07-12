@@ -63,7 +63,13 @@ exit $code
   - [1.2: Procedures and the Processes They Generate](#12-procedures-and-the-processes-they-generate)
     - [Exercise 1.9](#exercise-19)
     - [Exercise 1.10](#exercise-110)
+    - [Exercise 1.11](#exercise-111)
+    - [Exercise 1.12](#exercise-112)
+    - [Exercise 1.13](#exercise-113)
+    - [Exercise 1.14](#exercise-114)
+    - [Exercise 1.15](#exercise-115)
 - [Mit Scheme](#mit-scheme)
+- [Reference](#reference)
 
 <!-- /MarkdownTOC -->
 
@@ -266,6 +272,7 @@ Recursive:
 (* 6 (* 5 (* 4 6)))
 (* 6 (* 5 24))
 (* 6 120)
+; A linear recursion
 ```
 
 > This type of process, characterized by a chain of deferred operations, is called a *recursive process*. Carrying out this process requires that the interpreter keep track of the operations to be performed later on.
@@ -378,9 +385,66 @@ In my understanding, process is the running entity and procedure is the static c
 
 How many different ways can we make change of $1.00, given half-dollars, quarters, dimes, nickels, and pennies?
 
-This problem has a simple solution as a recursive procedure. See [count-change](./chapter-1/1.1/count-change.scm)
+This problem has a simple solution as a recursive procedure. See [count-change](./chapter-1/1.2/count-change.scm).
+
+It's not obvious how to transform it to a iterative process. This is one possible solution [count-change-iter.scm](./chapter-1/1.2/count-change-iter.scm).
+
+#### Exercise 1.11
+
+Write the recursive version is very easy, just follow the formula.
+
+This function is a slight modification of `fibonacci`, we can use the same skill to construct the iterative function.
+
+[1.11.scm](./chapter-1/1.2/1.11.scm)
+
+#### Exercise 1.12
+
+It's obvious that `f(row, index) = f(row-1, index-1) + f(row-1, index)`.
+
+[1.12.scm](./chapter-1/1.2/1.12.scm)
+
+#### Exercise 1.13
+
+[1.13.html](./formulas/1.13.html)
+
+---
+
+`Big O` notation only provides a rough description.
+
+> Orders of growth provide only a crude description of the behavior of a process. For example, a process requiring n^2 steps and a process requiring 1000n^2 steps and a process requiring 3n^2 + 10n + 17 steps all have O(n^2) order of growth.
+
+But it's still very useful.
+
+> On the other hand, order of growth provides a useful indication of how we may expect the behavior of the process to change as we change the size of the problem.
+
+#### Exercise 1.14
+
+Dark node is the leaf node.
+
+![](./assets/1.14.png)
+
+The space complexity is the depth of the tree, and we can see that is `O(n)`.
+
+The time complexity is hard to analyze. The result is `cc(amount, kind) = O(amount^kind)`. Here is a [detail explaination](https://codology.net/post/sicp-solution-exercise-1-14/).
+
+#### Exercise 1.15
+
+We need to get sine's argument down to 0.1 by dividing 12.15 bu 121.5 or greater number. Every time `p` is applied, argument gets divided by 3. How many times we need to divide 12.15 by 3 to get down to 0.1? We need to find out the x from x^3 = 121.5
+
+```scheme
+; x^3 = 121.5
+; x = log3(121.5) = log(121.5) / log(3)
+(display (/ (log 121.5) (log 3))) ; 4.37
+; So p will be applied 5 times.
+```
+
+Space and time complexity of `(sine a)` are both `log3(a)`.
 
 ## Mit Scheme
 
 - `(begin (exp1) (exp2) ...)` evaluates expressions in sequence
 
+## Reference
+
+- https://github.com/sarabander/p2pu-sicp
+- https://codology.net/
