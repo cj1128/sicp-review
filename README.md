@@ -68,6 +68,10 @@ exit $code
     - [Exercise 1.13](#exercise-113)
     - [Exercise 1.14](#exercise-114)
     - [Exercise 1.15](#exercise-115)
+    - [Exercise 1.16](#exercise-116)
+    - [Exercise 1.17](#exercise-117)
+    - [Exercise 1.18](#exercise-118)
+    - [Exercise 1.19](#exercise-119)
 - [Mit Scheme](#mit-scheme)
 - [Reference](#reference)
 
@@ -429,7 +433,7 @@ The time complexity is hard to analyze. The result is `cc(amount, kind) = O(amou
 
 #### Exercise 1.15
 
-We need to get sine's argument down to 0.1 by dividing 12.15 bu 121.5 or greater number. Every time `p` is applied, argument gets divided by 3. How many times we need to divide 12.15 by 3 to get down to 0.1? We need to find out the x from x^3 = 121.5
+We need to get sine's argument down to 0.1 by dividing 12.15 by 121.5 or greater number. Every time `p` is applied, argument gets divided by 3. How many times we need to divide 12.15 by 3 to get down to 0.1? We need to find out the x from x^3 = 121.5
 
 ```scheme
 ; x^3 = 121.5
@@ -439,6 +443,31 @@ We need to get sine's argument down to 0.1 by dividing 12.15 bu 121.5 or greater
 ```
 
 Space and time complexity of `(sine a)` are both `log3(a)`.
+
+#### Exercise 1.16
+
+[1.16.scm](./chapter-1/1.2/1.16.scm).
+
+> In general, the technique of defining an invariant quantity that remains unchanged from state to state is a powerful way to think about the design of iterative algorithms.
+
+#### Exercise 1.17
+
+[1.17.scm](./chapter-1/1.2/1.17.scm).
+
+#### Exercise 1.18
+
+[1.18.scm](./chapter-1/1.2/1.18.scm).
+
+#### Exercise 1.19
+
+> Recall the transformation of the state variables a and b in the fib-iter process of Section 1.2.2: `a = a + b` and `b = a`. Call this transformation T, and observe that applying T over and over again n times, starting with 1 and 0, produces the pair Fib(n + 1) and Fib(n). In other words, the Fibonacci numbers are produced by applying T^n , the nth power of the transformation T, starting with the pair (1, 0).
+
+```text
+p' = p^2 + q^2
+q' = q^2 + 2pq
+
+Applying T(p,q) twice equals to applying T(p', q') once.
+```
 
 ## Mit Scheme
 
