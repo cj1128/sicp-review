@@ -1,8 +1,7 @@
 (define (count-change amount)
   (define (iter ways half-dollar quarter dime nickle)
     (cond
-      ((> (* half-dollar 50) amount)
-       ways)
+      ((> (* half-dollar 50) amount) ways) ; stop
       ((> (+
             (* half-dollar 50)
             (* quarter 25)) amount)
@@ -21,4 +20,4 @@
       (else (iter (+ 1 ways) half-dollar quarter dime (+ 1 nickle)))))
   (iter 0 0 0 0 0))
 
-(display (count-change 10))
+(display (count-change 60))

@@ -1,9 +1,5 @@
-;;Exercise 1.22
-
-(define (squrare n)
-  (* n n))
-
-
+(define (next-odd n)
+  (if (even? n) (+ n 1) (+ n 2)))
 
 (define (prime? n)
   (define (smallest-divisor n)
@@ -17,25 +13,26 @@
     (= (remainder n test) 0))
   (if (= (smallest-divisor n) n) true false))
 
-(define (timed-prime-test n)
-  (newline)
-  (display n)
-  (start-prime-test n (runtime)))
+(define (search-for-primes n count)
+  (if (> count 0)
+      (let ((begin-time (real-time-clock)))
+        (if (prime? n)
+            (begin
+              (display n)
+              (display "***")
+              (display (- (real-time-clock) begin-time))
+              (newline)
+              (search-for-primes (next-odd n) (- count 1)))
+            (search-for-primes (next-odd n) count)))))
 
-(define (start-prime-test n start-time)
-  (if (prime? n)
-      (report-prime (- (runtime) start-time)) false))
+(search-for-primes 1e6 3)
+(newline)
 
-(define (report-prime elapsed-time)
-  (display "***")
-  (display elapsed-time))
+(search-for-primes 1e7 3)
+(newline)
 
-(define (search-for-primes start count)
-  (cond
-   ((= count 0))
-   ((timed-prime-test start) (search-for-primes (+ 1 start) (- count 1)))
-   (else (search-for-primes (+ 1 start) count))))
+(search-for-primes 1e8 3)
+(newline)
 
-(search-for-primes 1000 3)
-(search-for-primes 10000 3)
-(search-for-primes 10000 3)
+(search-for-primes 1e9 3)
+(newline)
