@@ -72,7 +72,11 @@ exit $code
     - [Exercise 1.17](#exercise-117)
     - [Exercise 1.18](#exercise-118)
     - [Exercise 1.19](#exercise-119)
+    - [Exercise 1.20](#exercise-120)
 - [Mit Scheme](#mit-scheme)
+- [Theorem](#theorem)
+  - [Lamé’s Theorem](#lame%CC%81%E2%80%99s-theorem)
+  - [Fermat’s Little Theorem](#fermat%E2%80%99s-little-theorem)
 - [Reference](#reference)
 
 <!-- /MarkdownTOC -->
@@ -409,7 +413,7 @@ It's obvious that `f(row, index) = f(row-1, index-1) + f(row-1, index)`.
 
 #### Exercise 1.13
 
-[1.13.html](./formulas/1.13.html)
+[1.13.html](http://sicp.cjting.me/formulas/1.13.html)
 
 ---
 
@@ -469,9 +473,68 @@ q' = q^2 + 2pq
 Applying T(p,q) twice equals to applying T(p', q') once.
 ```
 
+---
+
+Euclid’s Algorithm: An elegant and effective algorithm to compute *Greatest Common Divisor*.
+
+```scheme
+(define (gcd a b) (if (= b 0)
+  a
+  (gcd b (remainder a b))))
+```
+
+#### Exercise 1.20
+
+```text
+Applicative order:
+
+(gcd 206,40)
++1 -> (gcd 40, 6)
++1 -> (gcd 6, 4)
++1 -> (gcd 4, 2)
++1 -> (gcd 2, 0)
+-> result
+
+4 times.
+
+Normal order:
+
+(gcd 206 40)
+(gcd 40 (remainder 206 40))
++1 (gcd (remainder 206 40) (remainder 40 (remainder 206 40)))
++2 (gcd (remainder 40 (remainder 206 40)) (remainder (remainder 206 40) (remainder 40 (remainder 206 40))))
++4 (gcd
+    (remainder (remainder 206 40) (remainder 40 (remainder 206 40)))
+    (remainder
+      (remainder 40 (remainder 206 40))
+      (remainder (remainder 206 40) (remainder 40 (remainder 206 40)))))
++7 (remainder (remainder 206 40) (remainder 40 (remainder 206 40)))
++4 -> result
+
+18 times!
+```
+
+---
+
+*the Fermat test* is a **probabilistic algorithm** that checks whether a number is prime.
+
+> Given a number n, pick a random number a < n and compute the remainder of a^n modulo n. If the result is not equal to a, then n is certainly not prime. If it is a, then chances are good that n is prime.
+
 ## Mit Scheme
 
 - `(begin (exp1) (exp2) ...)` evaluates expressions in sequence
+
+## Theorem
+
+### Lamé’s Theorem
+
+> If Euclid’s Algorithm requires k steps to compute the GCD of some pair, then the smaller number in the pair must be greater than or equal to the kth Fibonacci number. -- page 64
+
+### Fermat’s Little Theorem
+
+> If n is a prime number and a is any positive integer less than n, then a raised to the nth power is congruent to a modulo n. -- page 67
+
+Two numbers are said to be *congruent modulo* `n` if they both have the same remainder when divided by `n`.
 
 ## Reference
 
