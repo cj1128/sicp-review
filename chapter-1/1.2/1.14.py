@@ -40,7 +40,6 @@ def cc(level, amount, kind):
 
 def run():
   print("""digraph G {
-  node [color=gray95, style=filled];
   graph [ranksep=0.25];
   node [color=gray95, style=filled, fontsize=9, shape=box, margin=.08, width=0, height=0 ];
   edge [penwidth=.5, arrowsize=0.5];

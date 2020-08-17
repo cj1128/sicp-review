@@ -663,7 +663,7 @@ Normal order:
 .Basic primality test procedure
 [source,scheme]
 ----
-include::chapter-1/1.2/basic-prime-test.scm[]
+include::chapter-1/1.2/prime.scm[]
 ----
 
 This basic primality test is based on the fact that if `n` is not prime it must have a divisor less than or equal to `√n`. Consequently, the number of steps required to identify `n` as prime will have order of growth `Θ(√n)`.
@@ -685,7 +685,7 @@ The core procedure of the Fermat test is one that computes the exponential of a 
 .The Fermat primality test
 [source,scheme]
 ----
-include::chapter-1/1.2/fermat-test.scm[]
+include::chapter-1/1.2/fast-prime.scm[]
 ----
 
 The Fermat test has a significant difference from most familiar algorithms, it is a *probabilistic algorithm* and the result is not guaranteed to be correct. But that doesn't mean it is not useful.
@@ -697,6 +697,11 @@ The Fermat test differs in character from most familiar algorithms, in which one
 Unfortunately, this assertion is not quite correct. There **do exist** numbers that fool the Fermat test: numbers n that are not prime and yet have the property that a^n is congruent to a modulo n for all integers a < n. Such numbers are extremely rare, so the Fermat test is quite reliable in practice.
 
 There are *variations of the Fermat test* that cannot be fooled.
+____
+
+[quote,page 69]
+____
+Numbers that fool the Fermat test are called _Carmichael numbers_, and little is known about them other than that they are extremely rare. There are 255 Carmichael numbers below 100,000,000. The smallest few are 561, 1105, 1729, 2465, 2821, and 6601.
 ____
 
 ==== Exercise 1.21
@@ -749,3 +754,110 @@ include::chapter-1/1.2/1.22.scm[]
 
 We can see that the timing data basically corresponds to Θ(√n). The more bigger n gets, the better support for the Θ(√n) prediction.
 --
+
+==== Exercise 1.23
+{empty}::
++
+--
+
+link:chapter-1/1.2/1.23.scm[] is almost identical to 1.22.scm.
+
+----
+1000003.***1
+1000033.***1
+1000037.***1
+
+10000019.***3
+10000079.***3
+10000103.***3
+
+100000007.***10
+100000037.***8
+100000039.***8
+
+1000000007.***24
+1000000009.***25
+1000000021.***24
+----
+
+We can see that the process runs basically twice as fast as exercise 1.22, so the expectation is confirmed.
+
+--
+
+==== Exercise 1.24
+{empty}::
++
+--
+
+* `1e10` notation produces a float number, we need to use `floor->exact` to convert it to an integer. Otherwise `remainder` procedure will error out.
+* We need to use very large numbers to observe logarithmic growth.
+
+[source,scheme]
+----
+include::chapter-1/1.2/1.24.scm[]
+----
+
+----
+100000000000000000039***14
+100000000000000000129***12
+100000000000000000151***12
+
+10000000000000000303786028427003666890753***23
+10000000000000000303786028427003666891041***23
+10000000000000000303786028427003666891101***24
+
+100000000000000000026609864708367276537402401181200809098131977453489758916313173***52
+100000000000000000026609864708367276537402401181200809098131977453489758916313209***54
+100000000000000000026609864708367276537402401181200809098131977453489758916313233***53
+----
+
+We can see that the running time of `1e80` is roughly twice as `1e40` and four times as `1e20`, so our data supports the theory of logarithmic growth.
+--
+
+==== Exercise 1.25
+{empty}::
++
+--
+In terms of the result, she is correct. We can get the exactly same result with `fast-expt`.
+
+However, the computation process is largely different:
+
+* This method will produce a much larger intermediate result, which requires a lot of memory.
+* The large intermediate result requires the use of sepcial algorithm for multiplications and remainders which are much slower than computation on smaller values.
+--
+
+==== Exercise 1.26
+{empty}::
++
+--
+Because lisp using `applicative-order` evaluation, `(remainder (* (expmod base (/ exp 2) m) (expmod base (/ exp 2) m)) m)` needs to evaluate `(expmod base (/ exp 2) m)` twice.
+
+Thinking of the evaluation process, we get a tree of depth logN, at each level i, we have 2^i number of nodes.
+
+Each node takes a constant time to calculate the result, so the overall time complexity corresponds to the total number of nodes which is Θ(log(2^n)) = Θ(N).
+--
+
+
+==== Exercise 1.27
+{empty}::
++
+[source,scheme]
+----
+include::chapter-1/1.2/1.27.scm[]
+----
+
+==== Exercise 1.28
+{empty}::
++
+--
+> One variant of the Fermat test that cannot be fooled is called the _Miller-Rabin_ test (Miller 1976; Rabin 1980).
+
+[source,scheme]
+----
+include::chapter-1/1.2/1.28.scm[]
+----
+
+We can see that Carmichael numbers which fool the Fermat test now can be correctly recognized as non prime numbers.
+--
+
+=== 1.3: Formulating Abstractions with Higher-Order Procedures

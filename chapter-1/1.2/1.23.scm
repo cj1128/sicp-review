@@ -1,17 +1,36 @@
-;;Exercise 1.23
-;;(runtime) returns seconds in mit-scheme, so actually we can't
-;;measure times cause they will all be 0
+(define (prime? n)
+  (define (next n) (if (= n 2) 3 (+ n 2)))
+  (define (smallest-divisor n)
+    (find-divisor n 2))
+  (define (find-divisor n test)
+    (cond
+     ((> (* test test) n) n)
+     ((divide? test n) test)
+     (else (find-divisor n (next test)))))
+  (define (divide? test n)
+    (= (remainder n test) 0))
+  (if (= (smallest-divisor n) n) true false))
 
-(define (smallest-divisor n)
-  (find-divisor n 2))
+(define (search-for-primes n count)
+  (if (> count 0)
+      (let ((begin-time (real-time-clock)))
+        (if (prime? n)
+            (begin
+              (display n)
+              (display "***")
+              (display (- (real-time-clock) begin-time))
+              (newline)
+              (search-for-primes (+ n 1) (- count 1)))
+            (search-for-primes (+ n 1) count)))))
 
-(define (next test)
-  (if (= test 2) 3 (+ 2 test)))
+(search-for-primes 1e6 3)
+(newline)
 
-(define (find-divisor n test)
-  (cond
-   ((> (square test) n) n)
-   ((= (remainder n test) 0) test)
-   (else (find-divisor n (next test)))))
+(search-for-primes 1e7 3)
+(newline)
 
-(display (smallest-divisor 19990))
+(search-for-primes 1e8 3)
+(newline)
+
+(search-for-primes 1e9 3)
+(newline)
