@@ -1,5 +1,3 @@
-;;Exercise 1.30
-;;Rewrite sum so that it's performed iteratively
 (define (sum term a next b)
   (define (iter a result)
     (if (> a b)

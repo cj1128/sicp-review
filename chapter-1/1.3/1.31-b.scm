@@ -1,10 +1,4 @@
-;;This is recursive
-(define (product term a next b)
-  (if (> a b)
-      1
-      (* (term a) (product term (next a) next b))))
-
-;;This is iterative
+; Iterative
 (define (product-iter term a next b)
   (define (iter a result)
     (if (> a b) result (iter (next a) (* (term a) result))))
@@ -27,8 +21,7 @@
    4
    (product-iter term 1 inc n)))
 
-;;This is iterative
-
 (display (factorial 10))
-(display "\n")
+(newline)
+
 (display (approximation-pi 100))

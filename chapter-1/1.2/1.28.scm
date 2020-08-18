@@ -1,7 +1,7 @@
 (define (even? n)
   (= (remainder n 2) 0))
 
-(define (square-check x m)
+(define (checked-square x m)
   (if (and
         (= (remainder (* x x) m) 1)
         (not (or (= x 1) (= x (- m 1)))))
@@ -12,7 +12,7 @@
   (cond
     ((= exp 0) 1)
     ((even? exp)
-     (remainder (square-check (expmod base (/ exp 2) m) m) m))
+     (remainder (checked-square (expmod base (/ exp 2) m) m) m))
     (else
       (remainder
         (* base (expmod base (- exp 1) m))
@@ -29,7 +29,7 @@
     ((miller-rabin-test n) (fast-prime? n (- times 1)))
     (else false)))
 
-; 561, 1105, 1729, 2465, 2821, 6601
+; Carmichael numbers: 561, 1105, 1729, 2465, 2821, 6601
 (display (fast-prime? 561 10))
 (newline)
 
