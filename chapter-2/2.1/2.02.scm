@@ -1,5 +1,3 @@
-;; Exercise 2.2
-
 (define (make-segment start end)
   (cons start end))
 
@@ -20,10 +18,10 @@
 
 (define (midpoint-segment s)
   (make-point
-   (average (x-point (start-segment s))
-            (x-point (end-segment s)))
-   (average (y-point (start-segment s))
-            (y-point (end-segment s)))))
+    (average (x-point (start-segment s))
+             (x-point (end-segment s)))
+    (average (y-point (start-segment s))
+             (y-point (end-segment s)))))
 
 (define (print-point p)
   (newline)
@@ -32,6 +30,3 @@
   (display ",")
   (display (y-point p))
   (display ")"))
-
-(define s (make-segment (make-point 1 1) (make-point 10 10)))
-(print-point (midpoint-segment s))

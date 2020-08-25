@@ -1,5 +1,3 @@
-;; Exercise 2.5
-
 (define (cons a b)
   (* (expt 2 a) (expt 3 b)))
 
@@ -16,8 +14,9 @@
 (define (cdr p)
   (num-divs p 3))
 
-(display (cons 10 20))
+(define p (cons 10 20))
+
+(display (car p))
 (newline)
-(display (car (cons 10 20)))
-(newline)
-(display (cdr (cons 10 20)))
+
+(display (cdr p))
