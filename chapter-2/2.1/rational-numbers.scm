@@ -27,7 +27,6 @@
   (= (* (numer x) (denom y))
      (* (numer y) (denom x))))
 
-
 (define (print-rat x)
   (newline)
   (display (numer x))

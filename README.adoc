@@ -1369,10 +1369,65 @@ This exercise requires a fair amount of understanding of _Lambda Calcus_.
 
 Here is a fine material for http://www.cs.unc.edu/~stotts/723/Lambda/church.html[Natural Numbers as Church Numerals].
 
-If you are not interested in this topic, you can skip this exercise 😉.
+If you are not interested in this topic, you can skip this exercise😉.
 
 [source,scheme]
 ----
 include::chapter-2/2.1/2.06.scm[]
 ----
 --
+
+==== Exercise 2.07
+{empty}::
++
+[source,scheme]
+----
+(define (lower-bound interval) (car interval))
+(define (uppper-bound interval) (cdr interval))
+----
+
+==== Exercise 2.08
+{empty}::
++
+--
+For interval subtraction `x - y`, the minimum value the difference could be is the lower bound of x subtracting the upper bound of y and the maximum value it could be is the upper bound of x subtracting the lower bound of y.
+
+[source,scheme]
+----
+(define (sub-interval x y)
+  (make-interval (- (lower-bound x) (upper-bound y))
+                 (- (upper-bound x) (lower-bound y))))
+----
+--
+
+==== Exercise 2.09
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.1/2.09.scm[]
+----
+
+==== Exercise 2.10
+{empty}::
++
+[source,scheme]
+----
+(define (div-interval x y)
+  (if
+    (and (<= (lower-bound y) 0)
+         (>= (upper-bound y) 0))
+    (error "Can't divide a interval that spans 0")
+    (mul-interval x
+                  (make-interval
+                    (/ 1.0 (upper-bound y))
+                    (/ 1.0 (lower-bound y))))))
+----
+
+==== Exercise 2.11
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.1/2.11.scm[]
+----
