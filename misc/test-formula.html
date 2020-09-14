@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <script type="text/javascript">
+    MathJax = {
+      tex: {
+        inlineMath: [["$", "$"]],
+      },
+    }
+  </script>
+  <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style type="text/css">
+    html {
+      font-size: 20px;
+    }
+
+    article {
+      width: 600px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <article>
+    Given
+
+    $$
+    \begin{align}
+    i_1 = [l_1, u_1] \\
+    i_2 = [l_2, u_2]
+    \end{align}
+    $$
+
+    We can get
+
+    $$
+    \begin{align}
+    p_1 = \frac{u_1 - l_1}{u_1 + l_1} \\
+    p_2 = \frac{u_2 - l_2}{u_2 + l_2} \\
+    \end{align}
+    $$
+
+    Assume all numbers are positinve
+
+    $$
+    i_3 = i_1i_2 = [l_1l_2, u_1u_2]
+    $$
+
+    So
+
+    $$
+    p_3 = \frac{u_1u_2 - l_1l_2}{u_1u_2 + l_1l_2}
+    $$
+
+    Since
+
+    $$
+    \begin{align}
+    p_1 &= \frac{u_1 - l_1}{u_1 + l_1} \\
+        &= \frac{1 - \frac{l_1}{u_1}}{1 + \frac{l_1}{u_1}} \\
+    \end{align}
+    $$
+
+    We can get
+
+    $$
+    \begin{align}
+    \frac{l_1}{u_1} = \frac{1 - p_1}{1 + p_1} \\
+    \frac{l_2}{u_2} = \frac{1 - p_2}{1 + p_2}
+    \end{align}
+    $$
+
+    So
+
+    $$
+    \begin{align}
+    p_3 &= \frac{u_1u_2 - l_1l_2}{u_1u_2 + l_1l_2} \\
+        &= \frac{1 - \frac{l_1}{u_1}\frac{l_2}{u_2}}{1 + \frac{l_1}{u_1}\frac{l_2}{u_2}} \\
+        &= \frac{1 - \frac{1 - p_1}{1 + p_1}\frac{1 - p_2}{1 + p_2}}{1 + \frac{1 - p_1}{1 + p_1}\frac{1 - p_2}{1 + p_2}} \\
+        &= \frac{p_1 + p_2}{1 + p_1p_2} \\
+        &\approx p_1 + p_2
+    \end{align}
+    $$
+  </article>
+</body>
+</html>

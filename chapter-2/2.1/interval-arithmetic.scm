@@ -41,3 +41,29 @@
   (display (upper-bound x))
   (display "]")
   (newline))
+
+(define (print-interval-center-percent x)
+  (display "[")
+  (display (center x))
+  (display " ± ")
+  (display (* (percent x) 100))
+  (display "%")
+  (display "]")
+  (newline))
+
+(define (make-center-width c w)
+  (make-interval (- c w) (+ c w)))
+
+(define (center i)
+  (/ (+ (lower-bound i) (upper-bound i)) 2))
+
+(define (width i)
+  (/ (- (upper-bound i) (lower-bound i)) 2))
+
+; p: 0 ~ 1
+(define (make-center-percent c p)
+  (define diff (* c p))
+  (make-interval (- c diff) (+ c diff)))
+
+(define (percent i)
+  (/ (width i) (center i)))

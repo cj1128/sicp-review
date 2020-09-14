@@ -1431,3 +1431,89 @@ include::chapter-2/2.1/2.09.scm[]
 ----
 include::chapter-2/2.1/2.11.scm[]
 ----
+
+==== Exercise 2.12
+{empty}::
++
+[source,scheme]
+----
+; p: 0 ~ 1
+(define (make-center-percent c p)
+  (define diff (* c p))
+  (make-interval (- c diff) (+ c diff)))
+
+(define (percent i)
+  (/ (width i) (center i)))
+----
+
+==== Exercise 2.12
+{empty}::
++
+--
+Given
+
+[stem]
+++++
+\begin{align}
+i_1 = [l_1, u_1] \\
+i_2 = [l_2, u_2]
+\end{align}
+++++
+
+We can get
+
+[stem]
+++++
+\begin{align}
+p_1 = \frac{u_1 - l_1}{u_1 + l_1} \\
+p_2 = \frac{u_2 - l_2}{u_2 + l_2} \\
+\end{align}
+++++
+
+Assume all numbers are positinve
+
+[stem]
+++++
+i_3 = i_1i_2 = [l_1l_2, u_1u_2]
+++++
+
+So
+
+[stem]
+++++
+p_3 = \frac{u_1u_2 - l_1l_2}{u_1u_2 + l_1l_2}
+++++
+
+Since
+
+[stem]
+++++
+\begin{align}
+p_1 &= \frac{u_1 - l_1}{u_1 + l_1} \\
+    &= \frac{1 - \frac{l_1}{u_1}}{1 + \frac{l_1}{u_1}} \\
+\end{align}
+++++
+
+We can get
+
+[stem]
+++++
+\begin{align}
+\frac{l_1}{u_1} = \frac{1 - p_1}{1 + p_1} \\
+\frac{l_2}{u_2} = \frac{1 - p_2}{1 + p_2}
+\end{align}
+++++
+
+So
+
+[stem]
+++++
+\begin{align}
+p_3 &= \frac{u_1u_2 - l_1l_2}{u_1u_2 + l_1l_2} \\
+    &= \frac{1 - \frac{l_1}{u_1}\frac{l_2}{u_2}}{1 + \frac{l_1}{u_1}\frac{l_2}{u_2}} \\
+    &= \frac{1 - \frac{1 - p_1}{1 + p_1}\frac{1 - p_2}{1 + p_2}}{1 + \frac{1 - p_1}{1 + p_1}\frac{1 - p_2}{1 + p_2}} \\
+    &= \frac{p_1 + p_2}{1 + p_1p_2} \\
+    &\approx p_1 + p_2
+\end{align}
+++++
+--
