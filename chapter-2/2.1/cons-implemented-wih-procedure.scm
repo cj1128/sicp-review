@@ -1,4 +1,6 @@
-;; Using procedures to implement paris
+; This example demonstrates the benefits of "data abstraction".
+; We can switch to different implementations and the outside doesn't
+; need to change one line of code.
 
 (define (cons x y)
   (define (dispatch m)

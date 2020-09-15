@@ -19,7 +19,6 @@
 (print-interval-center-percent (par1 i1 i2))
 (newline)
 
-
 (print-interval-center-percent (par2 i1 i2))
 (newline)
 

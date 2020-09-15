@@ -1446,7 +1446,7 @@ include::chapter-2/2.1/2.11.scm[]
   (/ (width i) (center i)))
 ----
 
-==== Exercise 2.12
+==== Exercise 2.13
 {empty}::
 +
 --
@@ -1517,3 +1517,57 @@ p_3 &= \frac{u_1u_2 - l_1l_2}{u_1u_2 + l_1l_2} \\
 \end{align}
 ++++
 --
+
+==== Exercise 2.14
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.1/2.14.scm[]
+----
+
+==== Exercise 2.15
+{empty}::
++
+--
+Eva is right.
+
+Based on the results from exercise 2.14, we can see that `par2` produces a tighter interval than `par1`.
+
+TODO: Do the actual math to show that a formula will produce a tighter error bounds if it can be written in such a form that no variable that represents an uncertain number is repeated.
+--
+
+==== Exercise 2.16
+{empty}::
++
+--
+Because our interval arithmetic doesn't have the concept of identity. I.e. A/A ≠ 1 ± 0%. This means that we can't apply standard algebraic transformations to a formula and expect it to produce an interval with the same bounds afterwards.
+
+In general we can state that the more interval-airthmetic operations we perform, the wider the results will be.
+
+Can we devise an interval-arithmetic package that does not have this shortcoming? As the authors state, "This problem is very difficult". I am not a math guy and this is certainly beyond my scope.
+--
+
+=== 2.2: Hierarchical Data and the Closure Property
+
+Once we have the pair, we have everything.
+
+[quote,page 132]
+____
+As a consequence, pairs pro- vide a universal building block from which we can construct all sorts of data structures.
+____
+
+Do not confuse "closure" here with another common concept: closure usually means the implementation technique for representing procedures with free variables. But here the word "closure" means a totally different thing.
+
+[quote,page 132]
+____
+The ability to create pairs whose elements are pairs is the essence of list structure’s importance as a representational tool. We refer to this ability as the _closure_ property of cons. In general, an operation for combining data objects satisfies the closure property if the results of combining things with that operation can themselves be combined using the same operation.
+____
+
+==== Exercise 2.17
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.17.scm[]
+----
