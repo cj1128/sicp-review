@@ -1571,3 +1571,57 @@ ____
 ----
 include::chapter-2/2.2/2.17.scm[]
 ----
+
+==== Exercise 2.18
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.18.scm[]
+----
+
+==== Exercise 2.19
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.19.scm[]
+----
+
+==== Exercise 2.20
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.20.scm[]
+----
+
+==== Exercise 2.21
+{empty}::
++
+[source,scheme]
+----
+(define (square-list items)
+  (if (null? items)
+      nil
+      (cons (square (car items))
+            (square-list (cdr items)))))
+
+(define (square-list items)
+  (map square items))
+----
+
+==== Exercise 2.22
+{empty}::
++
+--
+The answer is reversed because the argument list is traversed in order, from first to last, but squares are added successively to the front of the answer list via `cons`.
+
+The fix doesn't work either because the arguments of `cons` is wrong. `(cons value list)` will not produce a new list. We can use `append` to fix this problem.
+--
+
+== Mit Scheme
+
+* `(real-time-clock)`
+
+* _dotted-tail notation_: `(define (f x y . z) ...)`
