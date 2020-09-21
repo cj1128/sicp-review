@@ -1620,6 +1620,78 @@ The answer is reversed because the argument list is traversed in order, from fir
 The fix doesn't work either because the arguments of `cons` is wrong. `(cons value list)` will not produce a new list. We can use `append` to fix this problem.
 --
 
+==== Exercise 2.23
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.23.scm[]
+----
+
+==== Exercise 2.24
+{empty}::
++
+--
+Result printed by the interpreter: `(1 (2 (3 4)))`
+
+The corresponding box-and-pointer structure: TODO
+
+The interpretation of this as a tree: TODO
+--
+
+==== Exercise 2.25
+{empty}::
++
+[source,scheme]
+----
+; This is manageable
+(car (cdr (car (cdr (cdr '(1 3 (5 7) 9))))))
+
+; This is easy
+(car (car '((7))))
+
+; This is too complex
+(car (cdr (car (cdr (car (cdr (car (cdr (car (cdr (car (cdr '(1 (2 (3 (4 (5 (6 7))))))))))))))))))
+; ''
+----
+
+==== Exercise 2.26
+{empty}::
++
+[source,scheme]
+----
+(define x (list 1 2 3))
+(define y (list 4 5 6))
+
+(append x y) ; (1 2 3 4 5 6)
+(cons x y) ; ((1 2 3) 4 5 6)
+(list x y) ; ((1 2 3) (4 5 6))
+----
+
+==== Exercise 2.27
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.27.scm[]
+----
+
+==== Exercise 2.28
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.28.scm[]
+----
+
+==== Exercise 2.29
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.29.scm[]
+----
+
 == Mit Scheme
 
 * `(real-time-clock)`
