@@ -1,5 +1,3 @@
-;;Fold-left Implementation
-
 (define (fold-right op initial sequence)
   (if (null? sequence)
       initial
@@ -21,11 +19,23 @@
 (display (fold-left / 1 (list 1 2 3)))
 (newline)
 
-(display (fold-left list '() (list 1 2 3)))
+(display (fold-right list '() (list 1 2 3)))
 (newline)
 
 (display (fold-left list '() (list 1 2 3)))
 (newline)
 
-;; as long as the (op x y) == (op y x)
-;; then the fold-right and fold-left will produce the same result
+; For fold-left and fold-right to produce the same result
+; op must satisfy *commutativity* and *associativity*.
+
+; For one element sequence (e1)
+; (fold-left op init '(e1)) = (op init e1)
+; (fold-right op init '(e1)) = (op e1 init)
+; If (op init e1) equals to (op e1 init)
+; then op must have commutativity.
+
+; For two elements sequence (e1 e2)
+; (fold-left op init '(e1 e2)) = (op (op init e1) e2) = (op (op e1 init) e2) (using commutativity)
+; (fold-right op init '(e1 e2)) = (op e1 (op e2 init)) = (op e1 (op init e2)) (using commutativity)
+; If (op (op e1 init) e2) equals to (op e1 (op init e2))
+; then op must have associativity.
