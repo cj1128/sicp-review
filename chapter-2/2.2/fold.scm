@@ -17,4 +17,4 @@
 (define (fold-left op initial seq)
   (if (null? seq)
       initial
-      (fold-left op (op initial (car seq)) (cdr seq)))
+      (fold-left op (op initial (car seq)) (cdr seq))))

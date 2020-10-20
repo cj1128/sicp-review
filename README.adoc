@@ -1780,6 +1780,30 @@ include::chapter-2/2.2/2.37.scm[]
 include::chapter-2/2.2/2.38.scm[]
 ----
 
+==== Exercise 2.39
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.39.scm[]
+----
+
+==== Exercise 2.40
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.40.scm[]
+----
+
+==== Exercise 2.41
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.41.scm[]
+----
+
 == Mit Scheme
 
 * `(real-time-clock)`

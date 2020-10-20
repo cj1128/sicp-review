@@ -1,3 +1,4 @@
+; This is the same as `fold-right`
 (define (accumulate op initial sequence)
   (if (null? sequence)
       initial
