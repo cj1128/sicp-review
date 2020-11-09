@@ -1806,6 +1806,59 @@ include::chapter-2/2.2/2.40.scm[]
 include::chapter-2/2.2/2.41.scm[]
 ----
 
+==== Exercise 2.42
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.42.scm[]
+----
+
+==== Exercise 2.43
+{empty}::
++
+--
+Why this interchange makes the program run slowly?
+
+It's obvious that this interchange makes `queen-cols` run multiple times than before.
+
+We can get a rough idea that the new procedure needs approximately `T^7`.
+
+TODO: The accurate timing analysis is hard, I am gonna leave it here.
+--
+
+==== Exercise 2.44
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.44.scm[]
+----
+
+==== Exercise 2.45
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.45.scm[]
+----
+
+==== Exercise 2.46
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.46.scm[]
+----
+
+==== Exercise 2.47
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.47.scm[]
+----
+
 == Mit Scheme
 
 * `(real-time-clock)`
