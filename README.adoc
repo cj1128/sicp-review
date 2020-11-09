@@ -1634,9 +1634,11 @@ include::chapter-2/2.2/2.23.scm[]
 --
 Result printed by the interpreter: `(1 (2 (3 4)))`
 
-The corresponding box-and-pointer structure: TODO
+The corresponding box-and-pointer structure and tree interpretation:
 
-The interpretation of this as a tree: TODO
+image::2.24.png[align="center"]
+
+The image is borrowed from http://mngu2382.github.io/sicp/chapter2/01-exercise07.html.
 --
 
 ==== Exercise 2.25
