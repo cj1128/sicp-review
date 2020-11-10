@@ -1859,6 +1859,53 @@ include::chapter-2/2.2/2.46.scm[]
 include::chapter-2/2.2/2.47.scm[]
 ----
 
+==== Exercise 2.48
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.48.scm[]
+----
+
+==== Exercise 2.49
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.49.scm[]
+----
+
+==== Exercise 2.50
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.50.scm[]
+----
+
+==== Exercise 2.51
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.51.scm[]
+----
+
+==== Exercise 2.52
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.2/2.52.scm[]
+----
+
+The *stratified design*.
+
+[quote,page 190]
+____
+This is the approach of stratified design, the notion that a complex system should be structured as a sequence of levels that are described using a sequence of languages. Each level is constructed by combining parts that are regarded as primitive at that level, and the parts constructed at each level are used as primitives at the next level. The language used at each level of a stratified design has primitives, means of combination, and means of abstraction appropriate to that level of detail.
+____
+
 == Mit Scheme
 
 * `(real-time-clock)`

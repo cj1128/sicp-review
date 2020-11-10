@@ -1,25 +1,22 @@
-;; Exercise 2.52
+; a
+; this one is trivial, just ignore.
 
-;; we just ignore question 1
-
-;; question 2
+; b
 (define (corner-split painter n)
   (let
-      ((up (up-split (- n 1)))
-       (right (right-split (- n 1)))
-       (corner (corner-split painter (- n 1))))
+    ((up (up-split (- n 1)))
+     (right (right-split (- n 1)))
+     (corner (corner-split painter (- n 1))))
     (beside
-     (below painter up)
-     (below right corner))))
+      (below painter up)
+      (below right corner))))
 
-
-;; question 3
-
+; c
 (define (square-limit painter n)
   (let
-      ((combined4
-        identity
-        flip-horiz
-        flip-vert
-        rotate180))))
+    ((combined4
+       identity
+       flip-horiz
+       flip-vert
+       rotate180))))
 
