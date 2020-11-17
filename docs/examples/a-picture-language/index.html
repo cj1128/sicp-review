@@ -17,6 +17,38 @@
   </div>
 
   <script type="text/javascript">
+    // basic vectors
+    class V2 {
+      constructor(x, y) {
+        this.x = x
+        this.y = y
+      }
+
+      add(v) {
+        return v2(this.x + v.x, this.y + v.y)
+      }
+
+      subtract(v) {
+        return v2(this.x - v.x, this.y - v.y)
+      }
+
+      scale(s) {
+        return v2(this.x * s, this.y * s)
+      }
+    }
+    const v2 = (x, y) => new V2(x, y)
+
+    const loadImage = (path) => {
+      return new Promise((resolve, reject) => {
+        const img = new Image()
+        img.src = path
+        img.onload = () => {
+          resolve(img)
+        }
+        img.onerror = reject
+      })
+    }
+
     // Use biwascheme to interpret scheme
     // https://www.biwascheme.org/doc/reference.html#js-api
 
@@ -26,39 +58,16 @@
       biwa.evaluate(script)
     }
 
-    // load piclang scheme
-    fetch("./picture-language.scm")
-      .then(res => res.text())
-      .then(init)
-      .catch(err => {
-        console.error(err)
-      })
+    const canvas = document.querySelector("canvas")
+    const ctx = canvas.getContext("2d")
+
+    const WIDTH = canvas.width
+    const HEIGHT = canvas.height
 
     function init(piclangScript) {
       evalScheme(piclangScript)
 
-      const canvas = document.querySelector("canvas")
-      const ctx = canvas.getContext("2d")
-
-      const v2 = (x, y) => ({x, y})
-
-      const addV2 = (v1, v2) => ({
-        x: v1.x + v2.x,
-        y: v1.y + v2.y,
-      })
-
-      const subtractV2 = (v1, v2) => ({
-        x: v1.x - v2.x,
-        y: v1.y - v2.y,
-      })
-
-      const scaleV2 = (s, v) => ({
-        x: v.x * s,
-        y: v.y * s,
-      })
-
-      const WIDTH = 600
-      const HEIGHT = 600
+      const convertVector = s => v2(s.car, s.cdr)
 
       // convert to js v2
       // and convert the coordinate system from the bottom-left to top-left
@@ -69,39 +78,53 @@
 
         return [
           convertVector(origin),
-          v2(edge1.car, -edge1.cdr),
-          v2(edge2.car, -edge2.cdr),
+          convertVector(edge1),
+          convertVector(edge2),
         ]
       }
 
-      const convertVector = vec => {
-        return v2(vec.car, HEIGHT - vec.cdr)
-      }
+      const fillOrOutline = (frame, mode) => {
+        const [origin, edge1, edge2] = convertFrame(frame)
 
-      BiwaScheme.define_libfunc("$fill", 1, 1, ar => {
-        const [origin, edge1, edge2] = convertFrame(ar[0])
-
-        const diagonal = addV2(addV2(origin, edge1), edge2)
+        const p1 = origin
+        const p2 = origin.add(edge1)
+        const p3 = origin.add(edge1).add(edge2)
+        const p4 = origin.add(edge2)
 
         ctx.beginPath()
-        ctx.moveTo(origin.x, origin.y)
-        ctx.lineTo(origin.x + edge1.x, origin.y + edge1.y)
-        ctx.lineTo(diagonal.x, diagonal.y)
-        ctx.lineTo(origin.x + edge2.x, origin.y + edge2.y)
-        ctx.moveTo(origin.x, origin.y)
+        ctx.moveTo(p1.x, p1.y)
+        ctx.lineTo(p2.x, p2.y)
+        ctx.lineTo(p3.x, p3.y)
+        ctx.lineTo(p4.x, p4.y)
+        ctx.lineTo(p1.x, p1.y)
         ctx.closePath()
 
-        ctx.fillStyle = "green"
-        ctx.fill()
+        if(mode === "fill") {
+          ctx.fill()
+        }
+
+        if(mode === "outline") {
+          ctx.lineWidth = 1
+          ctx.strokeStyle = "red"
+          ctx.stroke()
+        }
+      }
+
+      BiwaScheme.define_libfunc("$outline", 1, 1, ar => {
+        fillOrOutline(ar[0], "outline")
+      })
+
+      BiwaScheme.define_libfunc("$fill", 1, 1, ar => {
+        fillOrOutline(ar[0], "fill")
       })
 
       BiwaScheme.define_libfunc("$diamond", 1, 1, ar => {
         const [origin, edge1, edge2] = convertFrame(ar[0])
 
-        const p1 = addV2(origin, scaleV2(0.5, edge2))
-        const p2 = addV2(addV2(origin, edge2), scaleV2(0.5, edge1))
-        const p3 = addV2(addV2(origin, edge1), scaleV2(0.5, edge2))
-        const p4 = addV2(origin, scaleV2(0.5, edge1))
+        const p1 = origin.add(edge2.scale(0.5))
+        const p2 = origin.add(edge2).add(edge1.scale(0.5))
+        const p3 = origin.add(edge1).add(edge2.scale(0.5))
+        const p4 = origin.add(edge1.scale(0.5))
 
         ctx.beginPath()
         ctx.moveTo(p1.x, p1.y)
@@ -120,49 +143,72 @@
         const end = convertVector(ar[1])
 
         ctx.lineWidth = 2
-        ctx.strokeStyle = "#000"
+        ctx.strokeStyle = "#666"
+
         ctx.beginPath()
         ctx.moveTo(start.x, start.y)
         ctx.lineTo(end.x, end.y)
         ctx.stroke()
       })
 
-      const img = new Image()
-      img.src = "bird.png"
-      img.onload = function() {
-        BiwaScheme.define_libfunc("$whale", 1, 1, ar => {
-          const [origin, edge1, edge2] = convertFrame(ar[0])
-          ctx.drawImage(img, 0, 0, 300, 300)
+      loadImage("bird.png")
+        .then(img => {
+          BiwaScheme.define_libfunc("$img", 1, 1, ar => {
+            const [origin, edge1, edge2] = convertFrame(ar[0])
+
+            const img_width = img.width
+            const img_height = img.height
+
+            ctx.save()
+            ctx.setTransform(
+              edge1.x/img_width,
+              edge1.y/img_height,
+              edge2.x/img_width,
+              edge2.y/img_height,
+              origin.x,
+              origin.y,
+            )
+            ctx.drawImage(img, 0, 0)
+            ctx.restore()
+          })
+
+          evalScheme(`
+            (define fullFrame (make-frame
+                        (make-vect 0 0)
+                        (make-vect 600 0)
+                        (make-vect 0 600)))
+
+            (define frame1 (make-frame
+                        (make-vect 500 500)
+                        (make-vect 100 0)
+                        (make-vect 0 100)))
+
+            (define frame2 (make-frame
+                        (make-vect 0 0)
+                        (make-vect 100 30)
+                        (make-vect 30 100)))
+
+            (define aaa
+              (segments->painter
+                (list
+                  (make-segment (make-vect 0.5 0) (make-vect 1 1)))))
+
+            (define a (below $diamond $fill))
+            (define b (up-split a 2))
+            (define c (rotate180 a))
+            ($outline fullFrame)
+            ((corner-split $img 4) fullFrame)
+          `)
         })
-
-        evalScheme(`
-          (define fullFrame (make-frame
-                      (make-vect 0 0)
-                      (make-vect 600 0)
-                      (make-vect 0 600)))
-
-          (define frame1 (make-frame
-                      (make-vect 500 500)
-                      (make-vect 100 0)
-                      (make-vect 0 100)))
-
-          (define frame2 (make-frame
-                      (make-vect 0 0)
-                      (make-vect 100 30)
-                      (make-vect 30 100)))
-
-          (define aaa
-            (segments->painter
-              (list
-                (make-segment (make-vect 0.5 0) (make-vect 1 1)))))
-
-          (define a (below $diamond $fill))
-          (define b (up-split a 2))
-          (define c (rotate180 a))
-          (wave (make-frame (make-vect 0 0) (make-vect 400 200) (make-vect 200 400)))
-        `)
-      }
     }
+
+    ctx.fillStyle = "green"
+
+    // load piclang scheme
+    fetch("./picture-language.scm")
+      .then(res => res.text())
+      .then(init)
+      .catch(console.error)
   </script>
 </body>
 </html>

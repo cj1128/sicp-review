@@ -1,4 +1,4 @@
-; The coordinate origin is at the *bottom-left*
+; The coordinate origin is at the *top-left*, just as the canvas
 
 ;
 ; Vector
@@ -187,26 +187,26 @@
   (iter '() vect-list))
 
 (define (wave frame)
-  ((segments->painter (append (connect (list (make-vect 0.4  0.0)
-                                             (make-vect 0.5  0.33)
-                                             (make-vect 0.6  0.0))) ;inside legs
-                              (connect (list (make-vect 0.25 0.0)
+  ((segments->painter (append (connect (list (make-vect 0.4  1.0)
+                                             (make-vect 0.5  0.67)
+                                             (make-vect 0.6  1.0))) ;inside legs
+                              (connect (list (make-vect 0.25 1.0)
                                              (make-vect 0.33 0.5)
-                                             (make-vect 0.3  0.6)
-                                             (make-vect 0.1  0.4)
-                                             (make-vect 0.0  0.6))) ;lower left
-                              (connect (list (make-vect 0.0  0.8)
+                                             (make-vect 0.3  0.4)
                                              (make-vect 0.1  0.6)
-                                             (make-vect 0.33 0.65)
-                                             (make-vect 0.4  0.65)
-                                             (make-vect 0.35 0.8)
-                                             (make-vect 0.4  1.0))) ;upper left
-                              (connect (list (make-vect 0.75 0.0)
-                                             (make-vect 0.6  0.45)
-                                             (make-vect 1.0  0.15)));lower right
-                              (connect (list (make-vect 1.0  0.35)
-                                             (make-vect 0.8  0.65)
-                                             (make-vect 0.6  0.65)
-                                             (make-vect 0.65 0.8)
-                                             (make-vect 0.6  1.0)))));upper right
+                                             (make-vect 0.0  0.4))) ;lower left
+                              (connect (list (make-vect 0.0  0.2)
+                                             (make-vect 0.1  0.4)
+                                             (make-vect 0.33 0.35)
+                                             (make-vect 0.4  0.35)
+                                             (make-vect 0.35 0.2)
+                                             (make-vect 0.4  0.0))) ;upper left
+                              (connect (list (make-vect 0.75 1.0)
+                                             (make-vect 0.6  0.55)
+                                             (make-vect 1.0  0.85)));lower right
+                              (connect (list (make-vect 1.0  0.65)
+                                             (make-vect 0.8  0.35)
+                                             (make-vect 0.6  0.35)
+                                             (make-vect 0.65 0.2)
+                                             (make-vect 0.6  0.0)))));upper right
    frame))
