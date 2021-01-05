@@ -47,5 +47,17 @@
          (deriv base var))))
     (else (error "unknown expression type: DERIV" exp))))
 
-(define exp '(+ x (** x 6)))
-(display (deriv exp 'x))
+; sum
+(display (deriv '(+ x 3) 'x))
+(newline)
+
+; product
+(display (deriv '(* x y) 'x))
+(newline)
+
+; exponentiation
+(display (deriv '(** x 3) 'x))
+(newline)
+
+; overall
+(display (deriv '(* (* x y) (+ x 3)) 'x))

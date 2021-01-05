@@ -59,6 +59,12 @@ ifdef::env-github[]
 NOTE: Due to the safety reasons, `include::` directive in AsciiDoc will be transformed to `link:` in GitHub. So if you see something like `\link:test.js[]` in the code block, you can manually go check the code in `test.js`.
 endif::[]
 
+== Examples
+
+=== A Picture Language
+
+=== Symbolic Differentiation
+
 == Chapter 1: Building Abstractions with Procedures
 
 Lisp is so old and also so good.
@@ -1906,9 +1912,70 @@ ____
 This is the approach of stratified design, the notion that a complex system should be structured as a sequence of levels that are described using a sequence of languages. Each level is constructed by combining parts that are regarded as primitive at that level, and the parts constructed at each level are used as primitives at the next level. The language used at each level of a stratified design has primitives, means of combination, and means of abstraction appropriate to that level of detail.
 ____
 
-== Examples
+=== 2.3: Symbolic Data
 
-=== A Picture Language
+Lists containing symbols looks just like the expressions of our language, and that is **homoiconic**.
+
+[quote,page 193]
+____
+In order to manipulate symbols we need a new element in our language:
+the ability to quote a data object.
+
+This issue is well known in the context of natural languages,
+where words and sentences may be regarded either as semantic entities
+or as character strings (syntactic entities).
+
+For instance,
+If we tell somebody “say your
+name aloud,” we expect to hear that person’s name. However, if we tell
+somebody “say ‘your name’ aloud,” we expect to hear the words “your
+name.”
+____
+
+==== Exercise 2.53
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.3/2.53.scm[]
+----
+
+==== Exercise 2.54
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.3/2.54.scm[]
+----
+
+==== Exercise 2.55
+{empty}::
++
+`(car ''xxx)` equals to `(car (quote (quote xxx)))`, which equals to `(car '(quote xxx))`. So we get `quote` back.
+
+==== Exercise 2.56
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.3/2.56.scm[]
+----
+
+==== Exercise 2.57
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.3/2.57.scm[]
+----
+
+==== Exercise 2.58 A
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.3/2.58-a.scm[]
+----
 
 == Mit Scheme
 
