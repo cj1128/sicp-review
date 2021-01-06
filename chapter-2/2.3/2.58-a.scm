@@ -1,9 +1,8 @@
-
-; a
+; 2.58 a
 ; Assume that + and * always take two arguments and the expressions are fully
 ; parenthesized.
 
-(load "basic.scm")
+(load "sd-basic.scm")
 
 (define (sum? x)
   (and

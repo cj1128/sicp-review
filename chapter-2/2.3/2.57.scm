@@ -1,4 +1,4 @@
-(load "basic.scm")
+(load "sd-basic.scm")
 
 (define (make-sum a1 a2)
   (cond

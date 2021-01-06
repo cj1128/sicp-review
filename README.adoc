@@ -1977,8 +1977,10 @@ include::chapter-2/2.3/2.57.scm[]
 include::chapter-2/2.3/2.58-a.scm[]
 ----
 
-== Mit Scheme
-
-* `(real-time-clock)`
-
-* _dotted-tail notation_: `(define (f x y . z) ...)`
+==== Exercise 2.58 B
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.3/2.58-b.scm[]
+----

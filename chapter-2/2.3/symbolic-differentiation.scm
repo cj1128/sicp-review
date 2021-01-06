@@ -1,4 +1,4 @@
-(load "basic.scm")
+(load "sd-basic.scm")
 
 ; For exponentiation
 
