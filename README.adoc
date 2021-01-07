@@ -65,6 +65,8 @@ endif::[]
 
 === Symbolic Differentiation
 
+=== Representing Sets
+
 == Chapter 1: Building Abstractions with Procedures
 
 Lisp is so old and also so good.
@@ -1983,4 +1985,20 @@ include::chapter-2/2.3/2.58-a.scm[]
 [source,scheme]
 ----
 include::chapter-2/2.3/2.58-b.scm[]
+----
+
+==== Exercise 2.59
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.3/2.59.scm[]
+----
+
+==== Exercise 2.60
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.3/2.60.scm[]
 ----
