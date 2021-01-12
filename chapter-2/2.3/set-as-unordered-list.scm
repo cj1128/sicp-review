@@ -1,4 +1,4 @@
-;; Implement Sets
+; Set as unordered list
 
 (define (element-of-set? x set)
   (cond

@@ -2002,3 +2002,19 @@ include::chapter-2/2.3/2.59.scm[]
 ----
 include::chapter-2/2.3/2.60.scm[]
 ----
+
+==== Exercise 2.61
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.3/2.61.scm[]
+----
+
+==== Exercise 2.62
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.3/2.62.scm[]
+----
