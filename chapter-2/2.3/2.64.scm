@@ -1,5 +1,9 @@
-;; Exercise 2.64
-;; the following procedure converts an ordered list to a balanced binary tree
+; The following procedure converts an *ordered list* to a balanced binary tree.
+
+; The helper procedure `partial-tree` takes as arguments an integer `n` and list
+; of at least n elements and constructs a balanced tree containing the first n
+; elements of the list.
+
 ;; write a short paragraph explaining as clearly as you can how partial-tree works
 ;; think about the order of growth in the number of steps required by list->tree to convert a list of n elements
 
@@ -11,31 +15,44 @@
 
 (define (partial-tree elts n)
   (if (= n 0)
-       (cons '() elts)
-       (let ((left-size (quotient (- n 1) 2)))
-         (let ((left-result (partial-tree elts left-size)))
-           (let ((left-tree (car left-result))
-                 (non-left-elts (cdr left-result))
-                 (right-size (- n (+ left-size 1))))
-             (let ((this-entry (car non-left-elts))
-                   (right-result (partial-tree
+      (cons '() elts)
+      (let ((left-size (quotient (- n 1) 2)))
+        (let ((left-result (partial-tree elts left-size)))
+          (let ((left-tree (car left-result))
+                (non-left-elts (cdr left-result))
+                (right-size (- n (+ left-size 1))))
+            (let ((this-entry (car non-left-elts))
+                  (right-result (partial-tree
                                   (cdr non-left-elts)
                                   right-size)))
-               (let ((right-tree (car right-result))
-                     (remaining-elts (cdr right-result)))
-                 (cons (make-tree this-entry
-                                  left-tree
-                                  right-tree)
-                       remaining-elts))))))))
+              (let ((right-tree (car right-result))
+                    (remaining-elts (cdr right-result)))
+                (cons (make-tree this-entry
+                                 left-tree
+                                 right-tree)
+                      remaining-elts))))))))
+
+
+; a.
+; Write a short paragraph explaining as clearly as you can
+; how `partial-tree` works.
+
+; `partial-tree` splits the list ELTS into three parts: the median item ENTRY, the list of items less than the median, and the list of items greater than the median. It creates a binary tree whose root node is ENTRY, whose left subtree is the partial-tree of the smaller elements, and whose right subtree is the partial-tree of the larger elements.
+
+; Draw the tree produced by `list->tree` for the list (1 3 5 7 9 11)
 
 (define l (list 1 3 5 7 9 11))
 (display (list->tree l))
 
-;; partial-tree接受一个列表以及需要转换的元素个数n，返回一个pair,
-;; car为转换好的tree，cdr为剩下的元素
-;; list->tree不停调用partial-tree就可以实现将一个有序列表转换为一颗二叉树,
-;; 因为对于一个有序列表而言，哪个元素是树根哪个是左树哪个是右树是非常清楚的
-;; 至于为什么要返回剩余的元素，是为了避免切割列表。也可以选择切割列表，然后让partial-tree只返回转换二叉树
+;    5
+;  /    \
+; 1      9
+;  \    / \
+;   3  7  11
 
+; b.
+; What is the order of growth in the number of steps required by `list->tree`
+; to convert a list of n elements?
 
-;; Order of growth: O(n)
+; T(n) = 2T(n/2) + O(1)
+; So we get T(n) = O(n)

@@ -1,11 +1,10 @@
-;; Exercise 2.63
-;; Compare two procedures which convert a binary tree to a list
-
 (define (entry tree) (car tree))
 (define (left-branch tree) (cadr tree))
 (define (right-branch tree) (caddr tree))
 (define (make-tree entry left right)
   (list entry left right))
+(define (single-tree entry)
+  (make-tree entry '() '()))
 
 (define (tree->list-1 tree)
   (if (null? tree)
@@ -25,21 +24,39 @@
                              (right-branch tree) result-list)))))
   (copy-to-list tree '()))
 
-;; Trees from figure 2.16
-(define tree1 (make-tree 7
-                         (make-tree 3 '(1 () () ) '(5 () ()))
-                         (make-tree 9 '() '(11 () ()))))
-(define tree2 (make-tree 3
-                         (make-tree 1 '() '())
-                         (make-tree 7 '(5 () ())
-                                    (make-tree 9 '() '(11 () ())))))
-(define tree3 (make-tree 5
-                         (make-tree 3 '(1 () ()) '())
-                         (make-tree 9 '(7 () ())
-                                    '(11 () ()))))
+; trees from figure 2.16
+(define tree1
+  (make-tree
+    7
+    (make-tree 3
+               (single-tree 1)
+               (single-tree 5))
+    (make-tree 9
+               '()
+               (single-tree 11))))
+
+(define tree2
+  (make-tree
+    3
+    (single-tree 1)
+    (make-tree 7
+               (single-tree 5)
+               (make-tree 9
+                          '()
+                          (single-tree 11)))))
+
+(define tree3
+  (make-tree 5
+             (make-tree 3
+                        (single-tree 1)
+                        '())
+             (make-tree 9
+                        (single-tree 7)
+                        (single-tree 11))))
 
 (display (tree->list-1 tree1))
 (newline)
+
 (display (tree->list-2 tree1))
 (newline)
 
@@ -51,13 +68,15 @@
 (display (tree->list-1 tree3))
 (newline)
 (display (tree->list-2 tree3))
+(newline)
 
+; a.
+; We can see that the two procedures produce the same results.
 
-;; We can see that two procedures procedure the same results, both are ordered list of the tree
+; b.
+; Since `append` takes linear time but `cons` takes constant time, `tree->list-1` is slower.
 
-;; each procedure takes same steps, but in each step it has a subtle difference and that is caused by cons and append
-
-;; append definition
-(define (append list1 list2)
-  (if (null? list1) list2)
-  (cons (car list1) (append (cdr list1 list2))))
+; Here is the `append` definition
+;(define (append list1 list2)
+;  (if (null? list1) list2)
+;  (cons (car list1) (append (cdr list1 list2))))

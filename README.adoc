@@ -2018,3 +2018,17 @@ include::chapter-2/2.3/2.61.scm[]
 ----
 include::chapter-2/2.3/2.62.scm[]
 ----
+
+==== Exercise 2.63
+{empty}::
++
+--
+I have to admit, the time complexity analysis of recursive procedure is really hard.
+
+TODO: detailed time complexity analysis.
+
+[source,scheme]
+----
+include::chapter-2/2.3/2.63.scm[]
+----
+--
