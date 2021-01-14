@@ -7,6 +7,7 @@
     ((< x (car set)) false)
     (else (element-of-set? x (cdr set)))))
 
+; O(n)
 (define (intersection-set set1 set2)
   (if (or (null? set1) (null? set2))
       '()
@@ -19,6 +20,7 @@
           ((< x2 x1)
            (intersection-set (cdr set2) set1))))))
 
+; O(n)
 (define (union-set set1 set2)
   (let ((x1 (car set1)) (x2 (car set2)))
     (cond

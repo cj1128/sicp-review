@@ -2032,3 +2032,19 @@ TODO: detailed time complexity analysis.
 include::chapter-2/2.3/2.63.scm[]
 ----
 --
+
+==== Exercise 2.64
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.3/2.64.scm[]
+----
+
+==== Exercise 2.65
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.3/2.65.scm[]
+----
