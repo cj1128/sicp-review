@@ -1,4 +1,4 @@
-(load "./huffman-tree.scm")
+(load "./huffman-tree-basic.scm")
 
 (define sample-tree
   (make-code-tree (make-leaf 'A 4)

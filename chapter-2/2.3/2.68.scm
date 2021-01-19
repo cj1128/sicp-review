@@ -1,4 +1,4 @@
-(load "./huffman-tree.scm")
+(load "./huffman-tree-basic.scm")
 
 (define (encode message tree)
   (if (null? message)

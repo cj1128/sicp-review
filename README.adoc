@@ -2119,3 +2119,63 @@ include::chapter-2/2.3/2.67.scm[]
 ----
 include::chapter-2/2.3/2.68.scm[]
 ----
+
+==== Exercise 2.69
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.3/2.69.scm[]
+----
+
+==== Exercise 2.70
+{empty}::
++
+[source,scheme]
+----
+include::chapter-2/2.3/2.70.scm[]
+----
+
+==== Exercise 2.71
+{empty}::
++
+--
+Tree for n = 5.
+
+image::2.71-5.png[align="center"]
+
+Tree for n = 10.
+
+image::2.71-10.png[align="center"]
+
+For most frequency symbol, we just need 1 bit.
+
+For least frequency symbol, we need n - 1 bit.
+--
+
+==== Exercise 2.72
+{empty}::
++
+--
+What is the order of growth in the number of steps needed to encode a symbol?
+
+- Search the symbol list at each node: O(n) time
+- Then take log_n branches (average case)
+- Total: `O(n * log_n)`
+
+Consider the relative frequencies of the n symbols are like what described in exercise 2.71.
+
+Give the order of growth of the number of steps need to encode the most frequent and least frequent symbols in the alphabet.
+
+For the most frequent symbol
+
+- Search through symbol list: O(n) time
+- Take the first single branch, since it will be at the top of the list: constant
+- Total: `O(n)`
+
+For the least frequent symbol
+
+- Search through symbol list at each level: O(n) time
+- Take the next branch, since we are only removing one node, it would be: O(n - 1)
+- Total: `O(n * (n - 1)) = O(n^2)`
+--
