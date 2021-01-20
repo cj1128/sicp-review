@@ -2179,3 +2179,14 @@ For the least frequent symbol
 - Take the next branch, since we are only removing one node, it would be: O(n - 1)
 - Total: `O(n * (n - 1)) = O(n^2)`
 --
+
+=== 2.4: Multiple Representation for Abstract Data
+
+How to cope with data that may be represented in different ways?
+
+[quote,page 231]
+____
+This requires constructing generic procedures—procedures that can operate on data that may be represented in more than one way.
+
+Our main technique for building generic procedures will be to work in terms of data objects that have type tags, that is, data objects that include explicit information about how they are to be processed.
+____
