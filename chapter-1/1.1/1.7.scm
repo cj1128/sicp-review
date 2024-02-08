@@ -18,16 +18,9 @@
 ; 2.0000000929222947
 (newline)
 
-; very small number
-(display (sqrt 0.00001))
-; 3.172028655357483e-3
-(newline)
-
-(display (square (sqrt 0.00001)))
-; 1.0061765790409001e-5
+(display (square (sqrt 1e-5)))
 (newline)
 
 ; very large number
-(display (sqrt 1.797693134862315708145274237317043567981e+308))
-; 1.3407807929942597e154
+(display (square (sqrt 1e300)))
 (newline)

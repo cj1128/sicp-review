@@ -20,13 +20,10 @@
 (newline)
 
 ; very small number
-(display (sqrt 0.00001))
-(newline)
-
-(display (square (sqrt 0.00001)))
+(display (square (sqrt 1e-5)))
 (newline)
 
 ; very large number
 ; CAUTION! this will run forever
-;(display (sqrt 1.797693134862315708145274237317043567981e+308))
+;(display (sqrt 1e300))
 ;(newline)

@@ -1,5 +1,4 @@
-(define (square x) (* x x))
-
+; square is a built-in procedure
 (define (square-sum x y)
   (+ (square x) (square y)))
 
