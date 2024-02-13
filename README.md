@@ -400,9 +400,7 @@ $$
 & = \phi^n - \psi\phi^n - \psi^n + \phi\psi^n \\
 & = \phi^n - \psi\phi\phi^{n-1} - \psi^n + \phi\psi\psi^{n-1} \\
 & = \phi^n - \psi^n + \phi^{n-1} - \psi^{n-1} \\
-
 \\
-
 Fib(n+1) & = Fib(n) + Fib(n-1) \\
 & = \frac{\phi^n - \psi^n + \phi^{n-1} - \psi^{n-1}}{\sqrt{5}} \\
 & = \frac{\phi^{n+1} - \psi^{n+1}}{\sqrt{5}}
