@@ -7,17 +7,14 @@
             (f (- r 1) i)
             (f (- r 1) (- i 1))))))
 
-(display (f 5 1))
-(newline)
+; row: 1-based
+(define (print-row row)
+  (define (iter cur)
+    (if (<= cur row)
+      (begin
+        (display (f row cur))
+        (display " ")
+        (iter (+ cur 1)))))
+  (iter 1))
 
-(display (f 5 2))
-(newline)
-
-(display (f 5 3))
-(newline)
-
-(display (f 5 4))
-(newline)
-
-(display (f 5 5))
-(newline)
+(print-row 5)
