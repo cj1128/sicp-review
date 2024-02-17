@@ -1,9 +1,6 @@
-(define (even? n)
-  (= (remainder n 2) 0))
-
 (define (checked-square x m)
   (if (and
-        (= (remainder (* x x) m) 1)
+        (= (remainder (square x) m) 1)
         (not (or (= x 1) (= x (- m 1)))))
       0
       (square x)))
@@ -28,6 +25,10 @@
     ((= times 0) true)
     ((miller-rabin-test n) (fast-prime? n (- times 1)))
     (else false)))
+
+; real prime
+(display (fast-prime? 7919 10))
+(newline)
 
 ; Carmichael numbers: 561, 1105, 1729, 2465, 2821, 6601
 (display (fast-prime? 561 10))

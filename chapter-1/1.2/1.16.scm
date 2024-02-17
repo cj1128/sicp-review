@@ -1,6 +1,3 @@
-(define (square n) (* n n))
-(define (even? n) (= (remainder n 2) 0))
-
 (define (expt b n)
   (define (iter a b n)
     (cond
@@ -9,4 +6,4 @@
       (else (iter (* a b) (square b) (/ (- n 1) 2)))))
   (iter 1 b n))
 
-(display (expt 2 100))
+(display (expt 2 20))

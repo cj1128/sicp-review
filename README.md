@@ -14,27 +14,43 @@ Useful links:
 
 TOC:
 
-- [Setup](#setup)
-  - [Sublime Text](#sublime-text)
-  - [VS Code](#vs-code)
-- [Chrome](#chrome)
-- [Chapter 1: Building Abstractions with Procedures](#chapter-1-building-abstractions-with-procedures)
-  - [1.1: The Elements of Programming](#11-the-elements-of-programming)
-  - [1.2: Procedures and the Processes They Generate](#12-procedures-and-the-processes-they-generate)
-- [Exercise](#exercise)
-  - [1.1](#11)
-  - [1.2](#12)
-  - [1.3](#13)
-  - [1.4](#14)
-  - [1.5](#15)
-  - [1.6](#16)
-  - [1.7](#17)
-  - [1.8](#18)
-  - [1.9](#19)
-  - [1.10](#110)
-  - [1.11](#111)
-  - [1.12](#112)
-  - [1.13](#113)
+- [Review of Structure and Interpretation of Computer Programs](#review-of-structure-and-interpretation-of-computer-programs)
+  - [Setup](#setup)
+    - [Sublime Text](#sublime-text)
+    - [VS Code](#vs-code)
+    - [Chrome](#chrome)
+  - [Chapter 1: Building Abstractions with Procedures](#chapter-1-building-abstractions-with-procedures)
+    - [1.1: The Elements of Programming](#11-the-elements-of-programming)
+    - [1.2: Procedures and the Processes They Generate](#12-procedures-and-the-processes-they-generate)
+  - [Exercise](#exercise)
+    - [1.1](#11)
+    - [1.2](#12)
+    - [1.3](#13)
+    - [1.4](#14)
+    - [1.5](#15)
+    - [1.6](#16)
+    - [1.7](#17)
+    - [1.8](#18)
+    - [1.9](#19)
+    - [1.10](#110)
+    - [1.11](#111)
+    - [1.12](#112)
+    - [1.13](#113)
+    - [1.14](#114)
+    - [1.15](#115)
+    - [1.16](#116)
+    - [1.17](#117)
+    - [1.18](#118)
+    - [1.19](#119)
+    - [1.20](#120)
+    - [1.21](#121)
+    - [1.22](#122)
+    - [1.23](#123)
+    - [1.24](#124)
+    - [1.25](#125)
+    - [1.26](#126)
+    - [1.27](#127)
+    - [1.28](#128)
 
 ## Setup
 
@@ -111,23 +127,23 @@ Add following keybinding to make it more convenient.
 }
 ```
 
-## Chrome
+### Chrome
 
 Install [Markdown Viewer](https://chromewebstore.google.com/detail/markdown-viewer/ckkdlimhmcjmikdlpkmbgfkaikojcbjk) plugin to preview this file in Chrome.
 
 ## Chapter 1: Building Abstractions with Procedures
 
 - Lisp is so old and also so good.
-  > Lisp was invented in the late 1950s as a formalism for reasoning about the use of certain kinds of logical expressions, called *recursion equations*, as a model for computation. The language was conceived by John McCarthy and is based on his paper “Recursive Functions of Symbolic Expressions and Their Computation by Machine”.
+  - > Lisp was invented in the late 1950s as a formalism for reasoning about the use of certain kinds of logical expressions, called *recursion equations*, as a model for computation. The language was conceived by John McCarthy and is based on his paper “Recursive Functions of Symbolic Expressions and Their Computation by Machine”.
   > --- page3
 - Why use Lisp in this book?
-  > If Lisp is not a mainstream language, why are we using it as the framework for our discussion of programming? Because the language possesses unique features that make it an excellent medium for studying important programming constructs and data structures and for relating them to the linguistic features that support them. The most significant of these features is the fact that Lisp descriptions of processes, called procedures, can themselves be represented and manipulated as Lisp data.
+  - > If Lisp is not a mainstream language, why are we using it as the framework for our discussion of programming? Because the language possesses unique features that make it an excellent medium for studying important programming constructs and data structures and for relating them to the linguistic features that support them. The most significant of these features is the fact that Lisp descriptions of processes, called procedures, can themselves be represented and manipulated as Lisp data.
   > --- page5
 
 ### 1.1: The Elements of Programming
 
-- One of the key features of every programming language is *how to combine simple ideas to form more complex ideas*.
-  >Every powerful language has three mechanisms for accomplishing this:
+- One of the key features of every programming language is **how to combine simple ideas to form more complex ideas**.
+  - >Every powerful language has three mechanisms for accomplishing this:
   >
   >* *primitive expressions*, which represent the simplest entities the language is concerned with,
   >* *means of combination*, by which compound elements are built from simpler ones, and
@@ -135,20 +151,19 @@ Install [Markdown Viewer](https://chromewebstore.google.com/detail/markdown-view
   > --- page6
 - In Lisp, every expression has a value.
 - Name matters.
-  >A critical aspect of a programming language is the means it provides for using names to refer to computational objects.
+  - >A critical aspect of a programming language is the means it provides for using names to refer to computational objects.
   > --- page10
 - Some expressions do not follow general evaluation rule. They are special so they are called `special forms`, like `(define x 1)`.
-  >Such exceptions to the general evaluation rule are called special forms. ... Each special form has its own evaluation rule. The various kinds of expressions (each with its associated evaluation rule) constitute the syntax of the programming language.
+  - >Such exceptions to the general evaluation rule are called special forms. ... Each special form has its own evaluation rule. The various kinds of expressions (each with its associated evaluation rule) constitute the syntax of the programming language.
   > --- page14
-
 - Lisp has a very simple syntax.
-  >In comparison with most other programming languages, Lisp has a very simple syntax; that is, the evaluation rule for expressions can be described by a simple general rule together with specialized rules for a small number of special forms.
+  - > In comparison with most other programming languages, Lisp has a very simple syntax; that is, the evaluation rule for expressions can be described by a simple general rule together with specialized rules for a small number of special forms.
   > --- page15
 - Applicative order versus normal order.
-  >This alternative “fully expand and then reduce” evaluation is known as normal-order evaluation , in contrast to the “evaluate the arguments and then apply” method that the interpreter actually uses, which is called applicative-order evaluation.
+  - > This alternative “fully expand and then reduce” evaluation is known as normal-order evaluation , in contrast to the “evaluate the arguments and then apply” method that the interpreter actually uses, which is called applicative-order evaluation.
   > --- page21
 - Lisp *uses applicative-order evaluation*.
-  >Lisp uses applicative-order evaluation, partly because of the additional efficiency obtained from avoiding multiple evaluations of expres- sions ... and, more significantly, because normal-order evaluation becomes much more complicated to deal with when we leave the realm of procedures that can be modeled by substitution. On the other hand, normal-order evaluation can be an extremely valuable tool.
+  - > Lisp uses applicative-order evaluation, partly because of the additional efficiency obtained from avoiding multiple evaluations of expres- sions ... and, more significantly, because normal-order evaluation becomes much more complicated to deal with when we leave the realm of procedures that can be modeled by substitution. On the other hand, normal-order evaluation can be an extremely valuable tool.
   > --- page21
   - Normal order evaluation can be an extremely valuable tool.
 - Use `cond` special form to handle conditional expressions.
@@ -156,20 +171,20 @@ Install [Markdown Viewer](https://chromewebstore.google.com/detail/markdown-view
   - Scheme interprets `#f` as false and any other value is treated as true, Providing `#t` is logically unnecessary, but it's convenident.
   - `if` special form is a restricted type of `cond`
 - How to compute square roots?
-  >How does one compute square roots? Thee most common way is to use Newton’s method of successive approximations, which says that whenever we have a guess y for the value of the square root of a number x , we can perform a simple manipulation to get a better guess (one closer to the actual square root) by averaging y with x/y.
+  - > How does one compute square roots? Thee most common way is to use Newton’s method of successive approximations, which says that whenever we have a guess y for the value of the square root of a number x , we can perform a simple manipulation to get a better guess (one closer to the actual square root) by averaging y with x/y.
   > --- page29
   - NOTE: MIT Scheme, however, distinguishes between exact integers and decimal values, and dividing two integers produces a rational number rather than a decimal.
   - [sqrt.scm](./chapter-1/1.1/sqrt.scm)
 - We can define functions inside functions.
-  >we allow a procedure to have internal definitions that are local to that procedure. Such nesting of definitions, called block structure, is basically the right solution to the simplest name-packaging problem.
+  - > we allow a procedure to have internal definitions that are local to that procedure. Such nesting of definitions, called block structure, is basically the right solution to the simplest name-packaging problem.
   > --- page38
 - What is *lexical scoping*?
-  >Lexical scoping dictates that free variables in a procedure are taken to refer to bindings made by enclosing procedure definitions; that is, they are looked up in the environment in which the procedure was defined.
+  - > Lexical scoping dictates that free variables in a procedure are taken to refer to bindings made by enclosing procedure definitions; that is, they are looked up in the environment in which the procedure was defined.
   > --- page39
 
 ### 1.2: Procedures and the Processes They Generate
 
-- Recursive process::
+- A typical recursive process to compute factorial
   ```scheme
   (define (factorial n)
     (if (= n 1)
@@ -189,9 +204,9 @@ Install [Markdown Viewer](https://chromewebstore.google.com/detail/markdown-view
   (* 6 120)
   ; A linear recursion
   ```
-  >This type of process, characterized by a chain of deferred operations, is called a *recursive process*. Carrying out this process requires that the interpreter keep track of the operations to be performed later on.
+  - > This type of process, characterized by a chain of deferred operations, is called a *recursive process*. Carrying out this process requires that the interpreter keep track of the operations to be performed later on.
   > ---page 44
-- Iterative process::
+- Iterative process for computing factorial
   ```scheme
   (define (factorial n)
     (define (fact-iter product counter max-count)
@@ -209,24 +224,52 @@ Install [Markdown Viewer](https://chromewebstore.google.com/detail/markdown-view
   (fact-iter 120 6 6)
   (fact-iter 720 7 6)
   ```
-  >By contrast, the second process does not grow and shrink. At each step, all we need to keep track of, for any n, are the current values of the variables `product`, `counter`, and `max-count`. We call this an *iterative process*.
+  - > By contrast, the second process does not grow and shrink. At each step, all we need to keep track of, for any n, are the current values of the variables `product`, `counter`, and `max-count`. We call this an *iterative process*.
   > --- page44
 - The essential feature of _iterative process_ is that *its state can be summarized by a fixed number of state variables*.
-  >In general, an iterative process is one whose state can be summarized by a fixed number of state variables, together with a fixed rule that describes how the state variables should be updated as the process moves from state to state and an (optional) end test that specifies conditions under which the process should terminate.
+  - > In general, an iterative process is one whose state can be summarized by a fixed number of state variables, together with a fixed rule that describes how the state variables should be updated as the process moves from state to state and an (optional) end test that specifies conditions under which the process should terminate.
   > --- page44
 - Pay attention that a recursive *process* is not the same as a recursive *procedure*. We can use a skill called *Tail Call Optimization* to get an iterative process of a recursive procedure.
   - In my understanding, process is the running entity and procedure is the static code.
-  > When we describe a procedure as recursive, we are referring to the syntactic fact that the procedure definition refers (either directly or indirectly) to the procedure itself. But when we describe a process as following a pattern that is, say, linearly recursive, we are speaking about how the process evolves, not about the syntax of how a procedure is written.
+  - > When we describe a procedure as recursive, we are referring to the syntactic fact that the procedure definition refers (either directly or indirectly) to the procedure itself. But when we describe a process as following a pattern that is, say, linearly recursive, we are speaking about how the process evolves, not about the syntax of how a procedure is written.
   > --- page45
 - Calculating fibonacci is a typical *tree recursive* process
-  > In general, the number of steps required by a tree-recursive process will be proportional to the number of nodes in the tree, while the space required will be proportional to the maximum depth of the tree.
+  - > In general, the number of steps required by a tree-recursive process will be proportional to the number of nodes in the tree, while the space required will be proportional to the maximum depth of the tree.
   > --- page49
 - How many different ways can we make change of $1.00, given half-dollars, quarters, dimes, nickels, and pennies?
   - This problem has a simple solution as a [recursive procedure](./chapter-1/1.2/count-change.scm).
   - It's not obvious how to transform this to an iterative process. I managed to come up with [one](./chapter-1/1.2/count-change-iter.scm), but I have to say it's hard to understand.
-  > A tree-recursive process may be highly inefficient but often easy to specify and understand
+  - > A tree-recursive process may be highly inefficient but often easy to specify and understand
   > --- page53
 - We can use *memoization* to dramatically reduce time and space usage of tree-recursive process
+- _Order of growth_ is a convenient way to express how many resources a process needs.
+  - > Let `n` be a parameter that measures the size of the problem, and let `R(n)` be the amount of resources the process requires for a problem of size `n`.
+  > ...
+  > We say that `R(n)` has order of growth `Θ(f(n))`, written `R(n) = Θ(f(n))` (pronounced “theta of f(n)”), if there are positive constants `k1` and `k2` independent of `n` such that `k1f(n) ≤ R(n) ≤ k2f(n)` for any sufficiently largevalueofn.(In other words, for large `n`, the value `R(n)` is sandwiched between `k1f(n)` and `k2f(n)`.)
+  > --- page55
+- _Order of growth_ provides only a *rough idea*.
+  - > Orders of growth provide only a crude description of the behavior of a process. For example, a process requiring n^2 steps and a process requiring 1000n^2 steps and a process requiring 3n^2 + 10n + 17 steps all have O(n^2) order of growth.
+  > --- page56
+  - But it still can be very useful.
+    - > On the other hand, order of growth provides a useful indication of how we may expect the behavior of the process to change as we change the size of the problem.
+    > ---page56
+- We can compute exponentials in fewer steps by using successive squaring, check [fast-expt.scm](./chapter-1/1.2/fast-expt.scm)
+- There is a famous and efficient algorithm for computing Greated Common Divisor(GCD)
+  - based on the observation that: if `r` is the remainder when `a` is divided by `b`, then the common divisors of a and b are precisely the same as the common divisors of b and r.
+- Testing for primality
+  - A basic one, search for the smallest divisor and n is a prime only if n is its own smallest divisor, check [code](./chapter-1/1.2/prime.scm).
+    - This basic primality test is based on the fact that if `n` is not prime it must have a divisor less than or equal to `√n`. Consequently, the number of steps required to identify `n` as prime will have order of growth `Θ(√n)`.
+  - There is a Θ(log n) test called _the Fermat test_ which is based on a result from number theory known as _Fermat's Little Theorem_, check [fast-prime.scm](./chapter-1/1.2/fast-prime.scm).
+    - *Fermat’s Little Theorem*: If n is a prime number and a is any positive integer less than n, then a raised to the nth power is congruent to a modulo n.
+    - The core procedure of the Fermat test is one that computes the exponential of a number modulo another number.
+  - The Fermat test has a significant difference from most familiar algorithms, it is a **probabilistic algorithm** and the result is not guaranteed to be correct. But that doesn't mean it is not useful.
+    - > The Fermat test differs in character from most familiar algorithms, in which one computes an answer that is guaranteed to be correct. Here, the answer obtained is only probably correct. More precisely, if n ever fails the Fermat test, we can be certain that n is not prime. But the fact that n passes the test, while an extremely strong indication, is still not a guarantee that n is prime. What we would like to say is that for any number n, if we perform the test enough times and find that n always passes the test, then the probability of error in our primality test can be made as small as we like.
+    >
+    > Unfortunately, this assertion is not quite correct. There **do exist** numbers that fool the Fermat test: numbers n that are not prime and yet have the property that a^n is congruent to a modulo n for all integers a < n. Such numbers are extremely rare, so the Fermat test is quite reliable in practice.
+    >
+    > There are *variations of the Fermat test* that cannot be fooled.
+    > --- page69
+  - Numbers that fool the Fermat test are called _Carmichael numbers_, and little is known about them other than that they are extremely rare, so the Fermat test is quite reliable in practice. There are 255 Carmichael numbers below 100,000,000. The smallest few are 561, 1105, 1729, 2465, 2821, and 6601.
 
 ## Exercise
 
@@ -427,3 +470,202 @@ $$
 $$
 
 Because $0 < \frac{\sqrt{5} - 1}{2} < 1$, so based on the properties of exponential functions, the above is true.
+
+### 1.14
+
+The image below is generated by [a python script](./chapter-1/1.2/1.14.py) with Graphviz, dark node is the leaf node.
+
+![](./assets/1.14.png)
+
+The space complexity is the depth of the tree, and we can see that is `Θ(amount)`.
+
+The time complexity is hard to analyze. The result is `cc(amount, kind) = Θ(amount^kind)`. Here is a [detail explaination](https://codology.net/post/sicp-solution-exercise-1-14/).
+
+### 1.15
+
+For question a:
+
+We need to get sine's argument down to 0.1 by dividing 12.15 by 121.5 or greater number. Every time `p` is applied, argument gets divided by 3. How many times we need to divide 12.15 by 3 to get down to 0.1? We need to find out the x from x^3 = 121.5.
+
+```scheme
+; 3^x = 121.5
+; x = log(121.5) / log(3)
+(display (/ (log 121.5) (log 3))) ; 4.37
+; So p will be applied 5 times.
+```
+
+For question b:
+
+Space and time complexity of `(sine a)` are both `Θ(log3 a)`.
+
+### 1.16
+
+[1.16.scm](./chapter-1/1.2/1.16.scm)
+
+### 1.17
+
+[1.17.scm](./chapter-1/1.2/1.17.scm)
+
+### 1.18
+
+[1.18.scm](./chapter-1/1.2/1.18.scm)
+
+### 1.19
+
+```
+p' = p^2 + q^2
+q' = q^2 + 2pq
+```
+
+Applying T(p,q) twice equals to applying T(p', q') once, this is a wonderful property and we can use this to calculate Fibonacci logarithmically.
+
+Check the [full code](./chapter-1/1.2/1.19.scm).
+
+### 1.20
+
+Applicative order:
+
+```scheme
+(gcd 206,40)
++1 -> (gcd 40, 6)
++1 -> (gcd 6, 4)
++1 -> (gcd 4, 2)
++1 -> (gcd 2, 0)
+-> result
+```
+
+4 times.
+
+Normal order:
+
+```scheme
+(gcd 206 40)
+(gcd 40 (remainder 206 40))
++1 (gcd (remainder 206 40) (remainder 40 (remainder 206 40)))
++2 (gcd (remainder 40 (remainder 206 40)) (remainder (remainder 206 40) (remainder 40 (remainder 206 40))))
++4 (gcd
+    (remainder (remainder 206 40) (remainder 40 (remainder 206 40)))
+    (remainder
+      (remainder 40 (remainder 206 40))
+      (remainder (remainder 206 40) (remainder 40 (remainder 206 40)))))
++7 (remainder (remainder 206 40) (remainder 40 (remainder 206 40)))
++4 -> result
+```
+
+18 times!
+
+### 1.21
+
+`smallest-divisor` function is in this [file](./chapter-1/1.2/prime.scm).
+
+- `(smallest-divisor 199)`: 199
+- `(smallest-divisor 1999)`: 1999
+- `(smallest-divisor 19999)`: 7
+
+### 1.22
+
+- Use `real-time-clock` instead of `runtime` because `runtime` returns seconds which is too big to observe.
+- Computers have become so fast, to get meaningful results, we need to test with very large numbers.
+
+[](./chapter-1/1.2/1.22.scm).
+
+```
+1000003.***2
+1000033.***2
+1000037.***2
+
+10000019.***5
+10000079.***5
+10000103.***5
+
+100000007.***16
+100000037.***15
+100000039.***14
+
+1000000007.***44
+1000000009.***44
+1000000021.***44
+```
+
+We can see that the timing data basically corresponds to Θ(√n). The more bigger n gets, the better support for the Θ(√n) prediction.
+
+### 1.23
+
+[1.23.scm](./chapter-1/1.2/1.23.scm).
+
+```
+1000003.***1
+1000033.***1
+1000037.***1
+
+10000019.***3
+10000079.***3
+10000103.***3
+
+100000007.***10
+100000037.***8
+100000039.***8
+
+1000000007.***24
+1000000009.***25
+1000000021.***24
+```
+
+We can see that the process runs basically twice as fast as exercise 1.22, so the expectation is confirmed.
+
+### 1.24
+
+* `1e20` notation produces a float number, we need to use `floor->exact` to convert it to an integer. Otherwise `remainder` procedure will error out.
+* We need to use very large numbers to observe logarithmic growth.
+
+[1.24.scm](./chapter-1/1.2/1.24.scm).
+
+
+```
+; 1e20
+100000000000000000039***14
+100000000000000000129***12
+100000000000000000151***12
+
+; 1e40
+10000000000000000303786028427003666890753***23
+10000000000000000303786028427003666891041***23
+10000000000000000303786028427003666891101***24
+
+; 1e80
+100000000000000000026609864708367276537402401181200809098131977453489758916313173***52
+100000000000000000026609864708367276537402401181200809098131977453489758916313209***54
+100000000000000000026609864708367276537402401181200809098131977453489758916313233***53
+```
+
+We can see that the running time of `1e80` is roughly twice as `1e40` and four times as `1e20`, so our data supports the theory of logarithmic growth.
+
+### 1.25
+
+In terms of the result, she is correct. We can get the exactly same result with `fast-expt`.
+
+However, the computation process is largely different:
+
+* This method will produce a much larger intermediate result, which requires a lot of memory.
+* The large intermediate result requires the use of sepcial algorithm for multiplications and remainders which are much slower than computation on smaller values.
+
+### 1.26
+
+Because lisp using `applicative-order` evaluation, `(remainder (* (expmod base (/ exp 2) m) (expmod base (/ exp 2) m)) m)` needs to evaluate `(expmod base (/ exp 2) m)` twice.
+
+Thinking of the evaluation process, we get a tree of depth logN, at each level i, we have 2^i number of nodes.
+
+Each node takes a constant time to do the calculation, so the overall time complexity corresponds to the total number of nodes which is $$Θ(2^0 + 2^1 + ... + 2^{logN}) = Θ(2^{logN + 1} - 1) = Θ(N)$$.
+
+### 1.27
+
+[1.27.scm](./chapter-1/1.2/1.27.scm).
+
+### 1.28
+
+> One variant of the Fermat test that cannot be fooled is called the _Miller-Rabin_ test (Miller 1976; Rabin 1980).
+> --- page7
+
+[1.28.scm](./chapter-1/1.2/1.28.scm).
+
+We can see that Carmichael numbers which fool the Fermat test now can be correctly recognized as non prime numbers.

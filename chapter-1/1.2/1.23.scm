@@ -1,14 +1,18 @@
 (define (prime? n)
   (define (next n) (if (= n 2) 3 (+ n 2)))
+
   (define (smallest-divisor n)
     (find-divisor n 2))
+
   (define (find-divisor n test)
     (cond
      ((> (* test test) n) n)
      ((divide? test n) test)
      (else (find-divisor n (next test)))))
+
   (define (divide? test n)
     (= (remainder n test) 0))
+
   (if (= (smallest-divisor n) n) true false))
 
 (define (search-for-primes n count)

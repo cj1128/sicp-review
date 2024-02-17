@@ -26,4 +26,8 @@
         ((fermat-test n) (fast-prime? n (- times 1)))
         (else false)))
 
+; wrong result, 6601 is not a prime, but it can fool the Fermat test
+(display (fast-prime? 6601 10))
+(newline)
+
 (display (fast-prime? 9677 10))

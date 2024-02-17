@@ -1,7 +1,5 @@
 (define (double x) (+ x x))
 (define (halve x) (/ x 2))
-(define (even? x) (= (remainder x 2) 0))
-
 
 (define (mul a b)
   (define (iter s a b)
@@ -14,4 +12,4 @@
 (display (mul 2 100))
 (newline)
 
-(display (mul 4 6))
+(display (mul 3 7))

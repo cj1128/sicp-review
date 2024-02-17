@@ -9,3 +9,5 @@
 (define (divides? a b) (= (remainder b a) 0))
 
 (define (prime? n) (= n (smallest-divisor n)))
+
+(display (prime? 7919))
