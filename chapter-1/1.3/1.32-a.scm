@@ -1,4 +1,4 @@
-; Recursive
+; recursive version
 (define (accumulate combiner null-value term a next b)
   (if (> a b)
       null-value

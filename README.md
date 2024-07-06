@@ -22,6 +22,7 @@ TOC:
   - [Chapter 1: Building Abstractions with Procedures](#chapter-1-building-abstractions-with-procedures)
     - [1.1: The Elements of Programming](#11-the-elements-of-programming)
     - [1.2: Procedures and the Processes They Generate](#12-procedures-and-the-processes-they-generate)
+    - [1.3: Formulating Abstractions with Higher-Order Procedures](#13-formulating-abstractions-with-higher-order-procedures)
   - [Exercise](#exercise)
     - [1.1](#11)
     - [1.2](#12)
@@ -51,6 +52,8 @@ TOC:
     - [1.26](#126)
     - [1.27](#127)
     - [1.28](#128)
+    - [1.29](#129)
+    - [1.30](#130)
 
 ## Setup
 
@@ -270,6 +273,12 @@ Install [Markdown Viewer](https://chromewebstore.google.com/detail/markdown-view
     > There are *variations of the Fermat test* that cannot be fooled.
     > --- page69
   - Numbers that fool the Fermat test are called _Carmichael numbers_, and little is known about them other than that they are extremely rare, so the Fermat test is quite reliable in practice. There are 255 Carmichael numbers below 100,000,000. The smallest few are 561, 1105, 1729, 2465, 2821, and 6601.
+
+### 1.3: Formulating Abstractions with Higher-Order Procedures
+
+- Procedures that manipulate procedures are called **higher-order procedures**.
+- Procedures as Arguments
+  - We can write a general [sum](./chapter-1/1.3/sum.scm) to express the concept of summation itself rather than particular sums.
 
 ## Exercise
 
@@ -669,3 +678,27 @@ Each node takes a constant time to do the calculation, so the overall time compl
 [1.28.scm](./chapter-1/1.2/1.28.scm).
 
 We can see that Carmichael numbers which fool the Fermat test now can be correctly recognized as non prime numbers.
+
+### 1.29
+
+[1.29.scm](./chapter-1/1.3/1.29.scm).
+
+- `n = 100`: .24999999999999992
+- `n = 1000`: .2500000000000003
+
+### 1.30
+
+[1.30.scm](./chapter-1/1.3/1.30.scm).
+
+### 1.31
+
+[1.31.scm](./chapter-1/1.3/1.31.scm).
+
+### 1.32
+
+- [recursive accumulate](./chapter-1/1.3/1.32-a.scm)
+- [iterative accumulate](./chapter-1/1.3/1.32-b.scm)
+
+### 1.33
+
+[1.33.scm](./chapter-1/1.3/1.33.scm).

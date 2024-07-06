@@ -22,7 +22,6 @@
 
   (define (inc x) (+ x 1))
 
-  ; Subproblem a:
   (define (sum-square-prime a b)
     (filtered-accumulate + 0 square a inc b prime?))
 
