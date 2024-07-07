@@ -9,6 +9,9 @@
         "kind": "build",
         "isDefault": true
       },
+      "options": {
+        "cwd": "${fileDirname}"
+      },
       "presentation": {
         "echo": true,
         "reveal": "always",

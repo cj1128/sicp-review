@@ -14,46 +14,54 @@ Useful links:
 
 TOC:
 
-- [Review of Structure and Interpretation of Computer Programs](#review-of-structure-and-interpretation-of-computer-programs)
-  - [Setup](#setup)
-    - [Sublime Text](#sublime-text)
-    - [VS Code](#vs-code)
-    - [Chrome](#chrome)
-  - [Chapter 1: Building Abstractions with Procedures](#chapter-1-building-abstractions-with-procedures)
-    - [1.1: The Elements of Programming](#11-the-elements-of-programming)
-    - [1.2: Procedures and the Processes They Generate](#12-procedures-and-the-processes-they-generate)
-    - [1.3: Formulating Abstractions with Higher-Order Procedures](#13-formulating-abstractions-with-higher-order-procedures)
-  - [Exercise](#exercise)
-    - [1.1](#11)
-    - [1.2](#12)
-    - [1.3](#13)
-    - [1.4](#14)
-    - [1.5](#15)
-    - [1.6](#16)
-    - [1.7](#17)
-    - [1.8](#18)
-    - [1.9](#19)
-    - [1.10](#110)
-    - [1.11](#111)
-    - [1.12](#112)
-    - [1.13](#113)
-    - [1.14](#114)
-    - [1.15](#115)
-    - [1.16](#116)
-    - [1.17](#117)
-    - [1.18](#118)
-    - [1.19](#119)
-    - [1.20](#120)
-    - [1.21](#121)
-    - [1.22](#122)
-    - [1.23](#123)
-    - [1.24](#124)
-    - [1.25](#125)
-    - [1.26](#126)
-    - [1.27](#127)
-    - [1.28](#128)
-    - [1.29](#129)
-    - [1.30](#130)
+- [Setup](#setup)
+  - [Sublime Text](#sublime-text)
+  - [VS Code](#vs-code)
+  - [Chrome](#chrome)
+- [Chapter 1: Building Abstractions with Procedures](#chapter-1-building-abstractions-with-procedures)
+  - [1.1: The Elements of Programming](#11-the-elements-of-programming)
+  - [1.2: Procedures and the Processes They Generate](#12-procedures-and-the-processes-they-generate)
+  - [1.3: Formulating Abstractions with Higher-Order Procedures](#13-formulating-abstractions-with-higher-order-procedures)
+- [Exercise](#exercise)
+  - [1.1](#11)
+  - [1.2](#12)
+  - [1.3](#13)
+  - [1.4](#14)
+  - [1.5](#15)
+  - [1.6](#16)
+  - [1.7](#17)
+  - [1.8](#18)
+  - [1.9](#19)
+  - [1.10](#110)
+  - [1.11](#111)
+  - [1.12](#112)
+  - [1.13](#113)
+  - [1.14](#114)
+  - [1.15](#115)
+  - [1.16](#116)
+  - [1.17](#117)
+  - [1.18](#118)
+  - [1.19](#119)
+  - [1.20](#120)
+  - [1.21](#121)
+  - [1.22](#122)
+  - [1.23](#123)
+  - [1.24](#124)
+  - [1.25](#125)
+  - [1.26](#126)
+  - [1.27](#127)
+  - [1.28](#128)
+  - [1.29](#129)
+  - [1.30](#130)
+  - [1.31](#131)
+  - [1.32](#132)
+  - [1.33](#133)
+  - [1.34](#134)
+  - [1.35](#135)
+  - [1.36](#136)
+  - [1.37](#137)
+  - [1.38](#138)
+  - [1.39](#139)
 
 ## Setup
 
@@ -107,6 +115,9 @@ exit $code
       "group": {
         "kind": "build",
         "isDefault": true
+      },
+      "options": {
+        "cwd": "${fileDirname}"
       },
       "presentation": {
         "echo": true,
@@ -279,6 +290,19 @@ Install [Markdown Viewer](https://chromewebstore.google.com/detail/markdown-view
 - Procedures that manipulate procedures are called **higher-order procedures**.
 - Procedures as Arguments
   - We can write a general [sum](./chapter-1/1.3/sum.scm) to express the concept of summation itself rather than particular sums.
+  - `sum` and `product` are both special cases of a still more general notion called `accumulate`
+- Constructing Procedures Using `Lambda`
+  - In general, `lambda` is used to create procedures in the same way as `define`, except that no name is specified for the procedure
+  - A `let` expression is simply syntactic sugar for the underlying lambda application
+- Procedures as General Methods
+  - [Half-interval method](./chapter-1/1.3/half-interval.scm)
+    - > The half-interval method is a simple but powerful technique for finding roots of an equation `f(x) = 0`, where f is a continuous function.
+    > --- page67
+  - [Fixed points](./chapter-1/1.3/fixed-point.scm)
+    - > A number x is called a *fixed point* of a function f if x satisfies the equation f(x) = x. For some functions f we can locate a fixed point by beginning with an initial guess and applying f repeatedly.
+    > --- page68
+    - Finded square root y of number x equals to finding a fixed point of the function `y = x/y`
+      - But the naive search does not converge, we need to use a technique called **average damping** to transform the function to be `y = 1/2(y + x/y)`, and this is the Newton's method.
 
 ## Exercise
 
@@ -702,3 +726,84 @@ We can see that Carmichael numbers which fool the Fermat test now can be correct
 ### 1.33
 
 [1.33.scm](./chapter-1/1.3/1.33.scm).
+
+### 1.34
+
+We will get an error: *The object 2 is not applicable*.
+
+```scheme
+(f f)
+-> (f 2)
+-> (2 2)
+; 2 is not a procedure.
+```
+
+### 1.35
+
+[1.35.scm](./chapter-1/1.3/1.35.scm).
+
+### 1.36
+
+[1.36.scm](./chapter-1/1.3/1.36.scm).
+
+We can clearly see that *average damping* can significantly reduce required steps to find the fixed point.
+
+``` bash
+=== normal approach ===
+-> 2.#1
+-> 9.965784284662087#2
+-> 3.004472209841214#3
+-> 6.279195757507157#4
+-> 3.759850702401539#5
+-> 5.215843784925895#6
+-> 4.182207192401397#7
+-> 4.8277650983445906#8
+-> 4.387593384662677#9
+-> 4.671250085763899#10
+-> 4.481403616895052#11
+-> 4.6053657460929#12
+-> 4.5230849678718865#13
+-> 4.577114682047341#14
+-> 4.541382480151454#15
+-> 4.564903245230833#16
+-> 4.549372679303342#17
+-> 4.559606491913287#18
+-> 4.552853875788271#19
+-> 4.557305529748263#20
+-> 4.554369064436181#21
+-> 4.556305311532999#22
+-> 4.555028263573554#23
+-> 4.555870396702851#24
+-> 4.555315001192079#25
+-> 4.5556812635433275#26
+-> 4.555439715736846#27
+-> 4.555599009998291#28
+-> 4.555493957531389#29
+-> 4.555563237292884#30
+-> 4.555517548417651#31
+-> 4.555547679306398#32
+-> 4.555527808516254#33
+-> 4.555540912917957#34
+=== average damping ===
+-> 2.#1
+-> 5.9828921423310435#2
+-> 4.922168721308343#3
+-> 4.628224318195455#4
+-> 4.568346513136242#5
+-> 4.5577305909237005#6
+-> 4.555909809045131#7
+-> 4.555599411610624#8
+-> 4.5555465521473675#9
+```
+
+### 1.37
+
+[1.37.scm](./chapter-1/1.3/1.37.scm).
+
+### 1.38
+
+[1.38.scm](./chapter-1/1.3/1.38.scm).
+
+### 1.39
+
+[1.39.scm](./chapter-1/1.3/1.39.scm).

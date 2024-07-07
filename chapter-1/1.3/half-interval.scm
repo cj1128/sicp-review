@@ -23,4 +23,5 @@
 (display (half-interval sin 2.0 4.0))
 (newline)
 
+; x^3 - 2x -3 = 0
 (display (half-interval (lambda (x) (- (* x x x) (* 2 x) 3)) 1.0 2.0))
