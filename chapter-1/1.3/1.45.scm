@@ -1,8 +1,7 @@
-(load "repeated.scm")
-
-(define tolerance 0.00001)
+(load "repeated.lib.scm")
 
 (define (fixed-point f first-guess max-times)
+  (define tolerance 0.00001)
   (define times 0)
   (define (close-enough? x y)
     (< (abs (- x y)) tolerance))
@@ -27,23 +26,23 @@
     1.0
     10000))
 
-;(display (test 100 3 1))
-;(newline)
+; (display (test 100 3 1))
+; (newline)
 
-;(display (test 100 4 2))
-;(newline)
+; (display (test 100 4 2))
+; (newline)
 
-;(display (test 100 5 2))
-;(newline)
+; (display (test 100 5 2))
+; (newline)
 
-;(display (test 100 6 2))
-;(newline)
+; (display (test 100 6 2))
+; (newline)
 
-;(display (test 100 7 2))
-;(newline)
+; (display (test 100 7 2))
+; (newline)
 
-;(display (test 100 8 3))
-;(newline)
+; (display (test 100 8 3))
+; (newline)
 
 ; From above experiments, we can conclude that:
 ; 4th root -> 2 times average damp

@@ -1,4 +1,4 @@
-(load "compose.scm")
+(load "compose.lib.scm")
 
 (define (inc x)
   (+ x 1))

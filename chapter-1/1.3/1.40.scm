@@ -1,4 +1,4 @@
-(load "newtons-method")
+(load "newtons-method.lib.scm")
 
 (define (cubic a b c)
   (lambda (x)
@@ -6,4 +6,3 @@
 
 ; x^3 - 2x^2 - 10x + 8 has a root 4
 (display (newtons-method (cubic -2 -10 8) 3.0))
-

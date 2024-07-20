@@ -25,4 +25,3 @@
 
 (display (sqrt 30))
 (newline)
-

@@ -1,9 +1,8 @@
-(load "repeated.scm")
+(load "repeated.lib.scm")
 
-(define (average x y z) (/ (+ x y z) 3))
-
-(define dx 0.0000001)
 (define (smooth f)
+  (define dx 0.0000001)
+  (define (average x y z) (/ (+ x y z) 3))
   (lambda (x)
     (average (f (- x dx)) (f x) (f (+ x dx)))))
 

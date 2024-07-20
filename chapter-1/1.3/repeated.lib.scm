@@ -1,4 +1,4 @@
-(load "compose.scm")
+(load "compose.lib.scm")
 
 (define (repeated f n)
   (define (iterate g k)

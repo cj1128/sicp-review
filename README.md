@@ -62,6 +62,13 @@ TOC:
   - [1.37](#137)
   - [1.38](#138)
   - [1.39](#139)
+  - [1.40](#140)
+  - [1.41](#141)
+  - [1.42](#142)
+  - [1.43](#143)
+  - [1.44](#144)
+  - [1.45](#145)
+  - [1.46](#146)
 
 ## Setup
 
@@ -303,6 +310,9 @@ Install [Markdown Viewer](https://chromewebstore.google.com/detail/markdown-view
     > --- page68
     - Finded square root y of number x equals to finding a fixed point of the function `y = x/y`
       - But the naive search does not converge, we need to use a technique called **average damping** to transform the function to be `y = 1/2(y + x/y)`, and this is the Newton's method.
+- Procedures as Returned Values
+  - Previous square-root procedure is a special case of [Newton's method](./chapter-1/1.3/sqrt-with-newtons-method.scm)
+    - > If g(x) is a differentiable function, then a solution of the equation g(x) = 0 is a fixed point of the function f(x) = x - g(x)/Dg(x)
 
 ## Exercise
 
@@ -748,7 +758,7 @@ We will get an error: *The object 2 is not applicable*.
 
 We can clearly see that *average damping* can significantly reduce required steps to find the fixed point.
 
-``` bash
+```bash
 === normal approach ===
 -> 2.#1
 -> 9.965784284662087#2
@@ -807,3 +817,54 @@ We can clearly see that *average damping* can significantly reduce required step
 ### 1.39
 
 [1.39.scm](./chapter-1/1.3/1.39.scm).
+
+### 1.40
+
+[1.40.scm](./chapter-1/1.3/1.40.scm).
+
+### 1.41
+
+Analyzing is kind of hard, but writing the actual [code](./chapter-1/1.3/1.41.scm) is very easy.
+
+Result should be 21.
+
+```scheme
+f = (double double)
+g = (double f)
+(g inc)
+-> (f (f inc))
+-> (f (double (double inc)))
+-> (double (double (double (double inc))))
+-> equals to (+16 x)
+```
+
+### 1.42
+
+[1.42.scm](./chapter-1/1.3/1.42.scm).
+
+### 1.43
+
+[1.43.scm](./chapter-1/1.3/1.43.scm).
+
+### 1.44
+
+[1.44.scm](./chapter-1/1.3/1.44.scm).
+
+### 1.45
+
+```scheme
+; by some experiments, we can know that
+; 4th root -> 2 times average damp
+; 5th root -> 2 times average damp
+; 6th root -> 2 times average damp
+; 7th root -> 2 times average damp
+; 8th root -> 3 times average damp
+; 16th root -> 4 times average damp
+; nth root -> log2(n) times average damp
+```
+
+[1.45.scm](./chapter-1/1.3/1.45.scm).
+
+### 1.46
+
+[1.46.scm](./chapter-1/1.3/1.46.scm).

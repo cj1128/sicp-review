@@ -1,4 +1,4 @@
-(load "newtons-method.scm")
+(load "newtons-method.lib.scm")
 
 (define (sqrt x)
   (newtons-method
